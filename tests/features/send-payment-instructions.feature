@@ -31,7 +31,7 @@ Feature: Send to subscribers instructions to make payment
 		And Subscriber email is valid
 		And Subscriber status is 'Registrada'
 		When Organizer check if Subscriber receive payment instructions
-		Then send an email with payment instructions to Subscriber
+		Then Subscriber should receive an email with payment instructions
 		And set Subscriber status to 'Boleto Enviado'
 
 	Scenario: Subscriber already receive payment instructions
