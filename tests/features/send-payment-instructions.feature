@@ -3,12 +3,6 @@ Feature: Send to subscribers instructions to make payment
 	I want to send email with payment instructions
 	So that I can control who will pay subscription
 
-	Scenario: Subscriber not found
-		Given the spreadsheet is valid resource
-		And the spreadsheet has 0 Subscribers
-		When Organizer check if Subscription receive payment instrutions
-		Then Organizer must receive a email warning spreadsheet is empty
-
 	Scenario: Subscriber has invalid email
 		Given the spreadsheet is valid resource
 		And the spreadsheet has more than 0 Subscribers
@@ -42,4 +36,3 @@ Feature: Send to subscribers instructions to make payment
 		When Organizer check if Subscriber receive payment instructions
 		Then Subscriber should not be changed
 		And Subscriber status should be 'Boleto Enviado'
-
