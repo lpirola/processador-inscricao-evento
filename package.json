@@ -1,0 +1,30 @@
+{
+  "name": "processador-inscricao-evento",
+  "version": "0.0.1",
+  "description": "Processador de inscrições em eventos que utiliza uma planilha no Google Drive para controlar o envio de e-mail para pagamento e para confirmação da inscrição",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine-node spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lpirola/processador-inscricao-evento.git"
+  },
+  "keywords": [
+    "cli",
+    "linha",
+    "de",
+    "comando",
+    "bdd"
+  ],
+  "author": "Lucas Pirola <lucaspirola@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/lpirola/processador-inscricao-evento/issues"
+  },
+  "homepage": "https://github.com/lpirola/processador-inscricao-evento#readme",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "jasmine-node": "^1.14.5"
+  }
+}
