@@ -25,6 +25,7 @@
   "homepage": "https://github.com/lpirola/processador-inscricao-evento#readme",
   "dependencies": {
     "commander": "^2.9.0",
-    "jasmine-node": "^1.14.5"
+    "jasmine-node": "^1.14.5",
+    "sinon": "^1.17.2"
   }
 }

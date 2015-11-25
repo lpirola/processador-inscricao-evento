@@ -6,8 +6,8 @@ Feature: Config, read and process subscriptions
 	Scenario: SMTP server is not configured
 		Given SMTP server details is not filled
 		When Developer try to process all subscriptions
-		Then Process must stop
-		And output a message with information required
+		Then a message must be output with information required
+		And Process stopped
 
 	Scenario: Datasource config is empty
 		Given E-mail is configured and could be send
