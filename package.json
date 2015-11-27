@@ -23,8 +23,7 @@
   "homepage": "https://github.com/lpirola/processador-inscricao-evento#readme",
   "dependencies": {
     "commander": "^2.9.0",
-    "jasmine-es6": "0.0.18",
-    "sinon": "^1.17.2"
+    "jasmine-es6": "0.0.18"
   },
   "devDependencies": {
     "babel-cli": "^6.2.1"
