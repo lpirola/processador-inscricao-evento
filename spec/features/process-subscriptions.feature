@@ -10,17 +10,11 @@ Feature: Config, read and process subscriptions
 		And Process stopped
 
 	Scenario: Datasource config is empty
-		Given E-mail is configured and could be send
+		Given E-mail is configured
 		And Datasource config is empty
 		When Developer try to process all subscriptions
 		Then Process must stop
 		And output a message with information required
-
-	Scenario: E-mail could not be send with SMTP server
-		Given SMTP server details is filled
-		When Developer try to process all subscriptions
-		Then Process should stop
-		And output a message with error details
 
 	Scenario: Datasource is not acessible
 		Given E-mail is configured and could be send
@@ -71,6 +65,15 @@ Feature: Config, read and process subscriptions
 		When Developer try to process all subscriptions
 		Then Process should stop
 		And output a message with warning about missing action
+
+	Scenario: E-mail could not be send with SMTP server
+		Given SMTP server details is filled
+		And Datasource is configured, acessible and not empty
+		And Filters are not empty and validated
+		And Actions are not empty and validated
+		When Developer try to process all subscriptions
+		Then Process should stop
+		And output a message with error details
 
 	Scenario: Processing subscriptions is finished with success
 		Given E-mail is configured and could be send
