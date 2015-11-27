@@ -1,6 +1,4 @@
 import mainCommand from '../../src'
-// var sinon = require('sinon').sandbox.create()
-// var stubExit, stubWrite
 describe('Config, read and process subscriptions', () => {
 	describe('SMTP server is not configured', () => {
 		beforeAll(() => {
