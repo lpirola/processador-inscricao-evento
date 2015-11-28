@@ -37,7 +37,7 @@ Feature: Read and validate required configs to process subscriptions
 		Then Process should stop
 		And output a message about datasource is empty
 
-	Scenario: Email and Datasource is configured and validated successfuly
+	Scenario: Command Check done successfully
 		Given Email is configured and could be send
 		And Datasource is configured and is validated
 		When Developer try to check if configs are ok

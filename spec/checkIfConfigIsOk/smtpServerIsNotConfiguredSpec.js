@@ -11,7 +11,7 @@ describe('Config, read and process subscriptions', () => {
 			expect(process.env['MAIL_USER']).toBeUndefined();
 			expect(process.env['MAIL_PASS']).toBeUndefined();
 		});
-		it('When Developer try to process all subscriptions', () => {
+		it('When Developer try to check if config is ok', () => {
 			// mainCommand.parse(['./node_modules/.bin/babel-node', 'src', 'check']);
 		});
 		it('Then a message must be output with information required', () => {

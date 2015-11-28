@@ -21,7 +21,8 @@ describe('Config, read and process subscriptions', () => {
 			expect(process.env['GOOGLE_CLIENT_EMAIL']).toBeUndefined();
 			expect(process.env['GOOGLE_PRIVATE_KEY']).toBeUndefined();
 		})
-		it('When Developer try to process all subscriptions', () => {})
+		it('When Developer try to check if config is ok', () => {})
+
 		it('Then output a message with information required', () => {
 			expect(process.stdout.write.calls.argsFor(0))
 				.toEqual(['Os dados para configuração da fonte de dados não foram informados']);
