@@ -1,4 +1,6 @@
-import mainCommand from '../../src'
+import Check from '../../src/check'
+
+var chk
 describe('Datasource config is empty', () => {
 	beforeAll(() => {
 		spyOn(process, 'exit')
@@ -8,7 +10,9 @@ describe('Datasource config is empty', () => {
 		process.env['MAIL_USER'] = 'teste@teste.com'
 		process.env['MAIL_PASS'] = '123'
 
-		mainCommand.parse(['./node_modules/.bin/babel-node', 'src', 'check'])
+		chk = new Check()
+		chk.isValid()
+
 	})
 	it('Given E-mail is configured and could be send', () => {
 		expect(process.env['MAIL_SERVICE']).toBeDefined()

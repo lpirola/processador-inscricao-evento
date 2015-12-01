@@ -11,5 +11,4 @@ program
 	.action(() => {
 		chk.isValid()
 	})
-//program.parse(process.argv)
-export default program
+program.parse(process.argv)

@@ -1,7 +1,7 @@
 import Check from '../../src/check'
 
 describe('Datasource is not acessible', () => {
-	beforeAll(() => {
+	beforeAll((done) => {
 		spyOn(process, 'exit')
 		spyOn(process.stdout, 'write')
 
@@ -13,7 +13,7 @@ describe('Datasource is not acessible', () => {
 		process.env['GOOGLE_CLIENT_EMAIL']    = 'testes@gmail.com'
 		process.env['GOOGLE_PRIVATE_KEY']     = 'fdsssxxxrtgjnfxbvcxa'
 		let chk = new Check()
-		chk.isValid()
+		chk.isValid(done)
 	})
 	it('Given E-mail is configured and could be send', () => {
 		expect(process.env['MAIL_SERVICE']).toBeDefined()
@@ -29,7 +29,7 @@ describe('Datasource is not acessible', () => {
 	})
 	it('Then output a message with information required', () => {
 		expect(process.stdout.write.calls.argsFor(0))
-			.toEqual(['As configurações fornecidas para fonte de dados não são válidos']);
+			.toEqual(['As configurações fornecidas para fonte de dados não são válidosError: HTTP error 400: Bad Request "A planilha deste URL não foi encontrada. Verifique se você tem o URL correto e se o proprietário da planilha não a excluiu."']);
 	})
 	it('And Process must stop', () => {
 		expect(process.exit.calls.count()).toBe(1)

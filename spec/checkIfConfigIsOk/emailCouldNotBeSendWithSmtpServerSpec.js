@@ -1,4 +1,4 @@
-import mainCommand from '../../src'
+import Check from '../../src/check'
 
 describe('E-mail could not be send with SMTP server', () => {
 	beforeAll(() => {
@@ -12,7 +12,8 @@ describe('E-mail could not be send with SMTP server', () => {
 		process.env['GOOGLE_CLIENT_EMAIL'] = 'teste@teste.com'
 		process.env['GOOGLE_PRIVATE_KEY'] = 'xxx'
 
-		mainCommand.parse(['./node_modules/.bin/babel-node', 'src', 'check']);
+		let chk = new Check()
+		chk.isValid()
 	})
 	it('Given SMTP server details is filled', () => {
 		expect(process.env['MAIL_SERVICE']).toBeDefined()
