@@ -1,3 +1,5 @@
+var GoogleSpreadsheet = require("google-spreadsheet");
+
 class Datasource {
 	constructor () {
 		this.google_spreadsheet_key = process.env['GOOGLE_SPREADSHEET_KEY']
@@ -5,11 +7,30 @@ class Datasource {
 		this.google_private_key     = process.env['GOOGLE_PRIVATE_KEY']
 	}
 
-	isValid () {
+	isConfigEmpty () {
 		if (!this.google_spreadsheet_key || !this.google_client_email || !this.google_private_key) {
 			return false
 		}
 		return true
+	}
+
+	isValidAccount () {
+		let creds = {
+			client_email: this.google_client_email,
+			private_key: this.google_private_key
+		}
+		this.doc = new GoogleSpreadsheet(this.google_spreadsheet_key)
+		let that = this
+		return new Promise((resolve, reject) => {
+			that.doc.useServiceAccountAuth(creds, (err) => {
+				resolve(err)
+			})
+		})
+	}
+
+	read () {
+		this.doc = new GoogleSpreadsheet(this.google_spreadsheet_key);
+		//doc.getInfo( function(err, sheet_info){
 	}
 }
 

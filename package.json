@@ -23,6 +23,7 @@
   "homepage": "https://github.com/lpirola/processador-inscricao-evento#readme",
   "dependencies": {
     "commander": "^2.9.0",
+    "google-spreadsheet": "^1.0.1",
     "jasmine-es6": "0.0.18"
   },
   "devDependencies": {

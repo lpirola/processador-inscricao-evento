@@ -5,7 +5,7 @@ class Mailer {
 		this.mail_pass    = process.env['MAIL_PASS']
 	}
 
-	isValid () {
+	isConfigEmpty () {
 		if (!this.mail_service || !this.mail_user || !this.mail_pass) {
 			return false
 		}

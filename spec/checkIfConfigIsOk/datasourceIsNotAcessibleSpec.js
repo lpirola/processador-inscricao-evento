@@ -1,4 +1,4 @@
-import mainCommand from '../../src'
+import Check from '../../src/check'
 
 describe('Datasource is not acessible', () => {
 	beforeAll(() => {
@@ -12,8 +12,8 @@ describe('Datasource is not acessible', () => {
 		process.env['GOOGLE_SPREADSHEET_KEY'] = 'xxxxxxx'
 		process.env['GOOGLE_CLIENT_EMAIL']    = 'testes@gmail.com'
 		process.env['GOOGLE_PRIVATE_KEY']     = 'fdsssxxxrtgjnfxbvcxa'
-
-		mainCommand.parse(['./node_modules/.bin/babel-node', 'src', 'check'])
+		let chk = new Check()
+		chk.isValid()
 	})
 	it('Given E-mail is configured and could be send', () => {
 		expect(process.env['MAIL_SERVICE']).toBeDefined()
@@ -25,7 +25,8 @@ describe('Datasource is not acessible', () => {
 		expect(process.env['GOOGLE_CLIENT_EMAIL']).toBeDefined()
 		expect(process.env['GOOGLE_PRIVATE_KEY']).toBeDefined()
 	})
-	it('When Developer try to check if configs are', () => {})
+	it('When Developer try to check if configs are ok', () => {
+	})
 	it('Then output a message with information required', () => {
 		expect(process.stdout.write.calls.argsFor(0))
 			.toEqual(['As configurações fornecidas para fonte de dados não são válidos']);
