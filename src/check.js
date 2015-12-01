@@ -8,13 +8,12 @@ class Check {
 	}
 
 	isValid () {
-		if (this.ds.isValid()) {
+		if (!this.ds.isValid()) {
 			process.stdout.write('Os dados para configuração da fonte de dados não foram informados')
-			process.exit(1)
-		} else if (this.ml.isValid()) {
+		} else if (!this.ml.isValid()) {
 			process.stdout.write('Os dados para configuração do envio do email não foram informados')
-			process.exit(1)
 		}
+		process.exit(1)
 	}
 }
 
