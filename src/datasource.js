@@ -14,24 +14,21 @@ class Datasource {
 		return true
 	}
 
-	isValidAccount () {
+	isValidAccount (callback) {
 		let creds = {
 			client_email: this.google_client_email,
 			private_key: this.google_private_key
 		}
 		this.doc = new GoogleSpreadsheet(this.google_spreadsheet_key)
-		let that = this
-		return new Promise((resolve, reject) => {
-			that.doc.useServiceAccountAuth(creds, (err) => {
-				resolve(err)
-			})
+		this.doc.useServiceAccountAuth(creds, function (err) {
+			callback(err)
 		})
 	}
 
-	read () {
-		this.doc = new GoogleSpreadsheet(this.google_spreadsheet_key);
-		//doc.getInfo( function(err, sheet_info){
-	}
+// 	read () {
+// 		this.doc = new GoogleSpreadsheet(this.google_spreadsheet_key);
+// 		//doc.getInfo( function(err, sheet_info){
+// 	}
 }
 
 export default Datasource

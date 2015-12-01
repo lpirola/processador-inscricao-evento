@@ -13,16 +13,11 @@ class Check {
 		} else if (!this.ml.isConfigEmpty()) {
 			process.stdout.write('Os dados para configuração do envio do email não foram informados')
 		} else {
-			this.ds.isValidAccount()
-			.then((result) => {
-				console.log(result)
+			this.ds.isValidAccount((err) => {
+				if (err) {
+					process.stdout.write('As configurações fornecidas para fonte de dados não são válidos')
+				}
 			})
-			//.catch(error => console.log(error))
-				  // {
-				// process.stdout.write('Os dados para configuração do envio do email não são válidos')
-			// }).catch(err => {
-				// console.log(err)
-			// })
 		}
 
 		process.exit(1)
