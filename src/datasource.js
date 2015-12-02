@@ -16,7 +16,7 @@ class Datasource {
 		return true
 	}
 
-	isValidAccount (callback) {
+	testConnection (callback) {
 		let doc = new GoogleSpreadsheet(this.google_spreadsheet_key)
 		async.series([
 			function(done){
@@ -31,18 +31,20 @@ class Datasource {
 		], callback)
 	}
 
-	read (callback) {
+	readContent (callback) {
 		let doc = new GoogleSpreadsheet(this.google_spreadsheet_key)
 		let worksheet_id = '';
 		let that = this
 		async.series([
+			// Tenta autenticar com credenciais do ambiente
 			function(done) {
 				if (that.creds.client_email && that.creds.private_key) {
-					doc.useServiceAccountAuth(this.creds, done)
+					doc.useServiceAccountAuth(that.creds, done)
 				} else {
 					done(null, true)
 				}
 			},
+			// Testa conexão e retorna infos básicas da planilha
 			function(done) {
 				doc.getInfo(function(err, results) {
 					if (err) {
@@ -53,6 +55,7 @@ class Datasource {
 					}
 				})
 			},
+			// Lê conteúdo e certifica-se que planilha não está vazia
 			function(done) {
 				doc.getCells(worksheet_id, {}, function (err, results) {
 					if (err) {
@@ -61,6 +64,7 @@ class Datasource {
 						if (parseInt(results.length) < 2) {
 							done('Datasource não pode ser vazio.')
 						} else {
+							that.content = results
 							done(null, results)
 						}
 					}

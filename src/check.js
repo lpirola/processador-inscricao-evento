@@ -4,34 +4,41 @@ import async from 'async'
 
 class Check {
 	constructor () {
-		this.ds = new Datasource
-		this.ml = new Mailer
+		this.DS = new Datasource()
+		this.ML = new Mailer()
 	}
 
-	isValid (done = (err, results) => {}) {
-		if (!this.ds.isConfigEmpty()) {
-			process.stdout.write('Os dados para configuração da fonte de dados não foram informados')
+	setMailerTransporter (transporter) {
+		this.ML.transporter = transporter
+	}
+
+	isValid (callback = (err, results) => {}) {
+		let that = this
+
+		if (!this.DS.isConfigEmpty()) {
+			process.stdout.write('As configurações da fonte de dados não foram informados')
 			process.exit(1)
-		} else if (!this.ml.isConfigEmpty()) {
-			process.stdout.write('Os dados para configuração do envio do email não foram informados')
+		} else if (!this.ML.isConfigEmpty()) {
+			process.stdout.write('As configurações do envio do email não foram informados')
 			process.exit(1)
 		} else {
-			let that = this
+			// valida datasource
 			async.series([
-				function(done) {
-					that.ds.isValidAccount(done)
-				},
-				function(done) {
-					that.ds.read(done)
-				},
-			], function (err, results) {
-				if (err) {
-					process.stdout.write(err)
-					process.exit(1)
-				}
-				done(null, results)
+				(done) => { that.DS.testConnection(done) },
+				(done) => { that.DS.readContent(done) },
+				(done) => { that.ML.testSend(done) }
+			], (err, results) => {
+				that.handleErrors(err, results, callback)
 			})
 		}
+	}
+
+	handleErrors (err, results, callback) {
+		if (err) {
+			process.stdout.write(err)
+			process.exit(1)
+		}
+		callback(null, results)
 	}
 }
 

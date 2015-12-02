@@ -25,9 +25,11 @@
     "async": "^1.5.0",
     "commander": "^2.9.0",
     "google-spreadsheet": "^1.0.1",
-    "jasmine-es6": "0.0.18"
+    "jasmine-es6": "0.0.18",
+    "nodemailer": "^1.10.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.2.1"
+    "babel-cli": "^6.2.1",
+    "nodemailer-stub-transport": "^1.0.0"
   }
 }

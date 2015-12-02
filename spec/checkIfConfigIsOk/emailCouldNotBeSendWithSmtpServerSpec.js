@@ -1,19 +1,23 @@
 import Check from '../../src/check'
+import nodemailer from 'nodemailer'
+import stubTransport from 'nodemailer-stub-transport'
 
 describe('E-mail could not be send with SMTP server', () => {
-	beforeAll(() => {
+	beforeAll((done) => {
 		spyOn(process, 'exit')
 		spyOn(process.stdout, 'write')
 
 		process.env['MAIL_SERVICE'] = 'Gmail';
 		process.env['MAIL_USER'] = 'teste@teste.com';
 		process.env['MAIL_PASS'] = '123';
-		process.env['GOOGLE_SPREADSHEET_KEY'] = 'xxx'
-		process.env['GOOGLE_CLIENT_EMAIL'] = 'teste@teste.com'
-		process.env['GOOGLE_PRIVATE_KEY'] = 'xxx'
+		process.env['GOOGLE_SPREADSHEET_KEY'] = '1gKGxto-RDqS5k2F3TbLXnOoj6IB6RFp18K_MUzBP_Hw'
 
 		let chk = new Check()
-		chk.isValid()
+		let transp = nodemailer.createTransport(stubTransport({
+			error: new Error('Invalid recipient')
+		}))
+		chk.setMailerTransporter(transp)
+		chk.isValid(done)
 	})
 	it('Given SMTP server details is filled', () => {
 		expect(process.env['MAIL_SERVICE']).toBeDefined()
@@ -22,8 +26,6 @@ describe('E-mail could not be send with SMTP server', () => {
 	})
 	it('And Datasource is configured, acessible and not empty', () => {
 		expect(process.env['GOOGLE_SPREADSHEET_KEY']).toBeDefined();
-		expect(process.env['GOOGLE_CLIENT_EMAIL']).toBeDefined();
-		expect(process.env['GOOGLE_PRIVATE_KEY']).toBeDefined();
 	})
 	it('When Developer try to check if configs are ok', () => {})
 	it('Then a message must be output with error details', () => {

@@ -28,7 +28,7 @@ describe('Datasource config is empty', () => {
 
 	it('Then output a message with information required', () => {
 		expect(process.stdout.write.calls.argsFor(0))
-			.toEqual(['Os dados para configuração da fonte de dados não foram informados'])
+			.toEqual(['As configurações da fonte de dados não foram informados'])
 	})
 	it('And Process must stop', () => {
 		expect(process.exit.calls.count()).toBe(1)
