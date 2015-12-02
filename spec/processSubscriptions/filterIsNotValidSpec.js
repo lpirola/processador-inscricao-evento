@@ -34,8 +34,8 @@ describe('One Filter is not valid', () => {
 		let act = new Action()
 		this.prc.addAction(act)
 	})
-	it('When Developer try to process all subscriptions', function () {
-		this.prc.run()
+	it('When Developer try to process all subscriptions', function (done) {
+		this.prc.run(done)
 	})
 	it('Then Process should stop')
 	it('And output a message with details of pattern error')

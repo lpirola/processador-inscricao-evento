@@ -60,11 +60,11 @@ class Datasource {
 			},
 			// Lê conteúdo e certifica-se que planilha não está vazia
 			function(done) {
-				doc.getCells(worksheet_id, {}, function (err, results) {
+				doc.getRows(worksheet_id, {}, function (err, results) {
 					if (err) {
 						done('Problema ao tentar ler detalhes da planilha' + err, null)
 					} else {
-						if (parseInt(results.length) < 2) {
+						if (parseInt(results.length) <= 1) {
 							done('Datasource não pode ser vazio.')
 						} else {
 							that.content = results
