@@ -40,7 +40,5 @@ describe('E-mail could not be send with SMTP server', () => {
 		delete process.env['MAIL_USER']
 		delete process.env['MAIL_PASS']
 		delete process.env['GOOGLE_SPREADSHEET_KEY']
-		delete process.env['GOOGLE_CLIENT_EMAIL']
-		delete process.env['GOOGLE_PRIVATE_KEY']
 	})
 })

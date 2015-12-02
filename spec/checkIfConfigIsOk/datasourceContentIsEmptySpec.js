@@ -1,5 +1,5 @@
 import Check from '../../src/check'
-var chk
+
 describe('Datasource content is empty', () => {
 	beforeAll((done) => {
 		spyOn(process, 'exit')
@@ -10,7 +10,7 @@ describe('Datasource content is empty', () => {
 		process.env['MAIL_PASS']    = '123'
 
 		process.env['GOOGLE_SPREADSHEET_KEY'] = '1sEMeSOtywIqCsBCaHCJlNWYOsujGm_1gxX_FVQ8iBvQ'
-		chk = new Check()
+		let chk = new Check()
 		chk.isValid(done)
 	})
 	it('Given E-mail is configured and could be send', () => {

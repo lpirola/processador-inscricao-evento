@@ -4,9 +4,11 @@ import async from 'async'
 class Datasource {
 	constructor () {
 		this.google_spreadsheet_key = process.env['GOOGLE_SPREADSHEET_KEY']
-		this.creds = {}
-		this.creds.client_email = process.env['GOOGLE_CLIENT_EMAIL']
-		this.creds.private_key = process.env['GOOGLE_PRIVATE_KEY']
+		this.creds = null
+		if (process.env['GOOGLE_CREDS']) {
+			this.creds = JSON.parse(process.env['GOOGLE_CREDS'])
+		}
+		this.validate = false
 	}
 
 	isConfigEmpty () {
@@ -38,7 +40,7 @@ class Datasource {
 		async.series([
 			// Tenta autenticar com credenciais do ambiente
 			function(done) {
-				if (that.creds.client_email && that.creds.private_key) {
+				if (that.creds) {
 					doc.useServiceAccountAuth(that.creds, done)
 				} else {
 					done(null, true)
@@ -51,6 +53,7 @@ class Datasource {
 						done('As configurações fornecidas para fonte de dados não são válidos'+err, null)
 					} else {
 						worksheet_id = results.worksheets[0].id
+						that.validate = true
 						done(null, results)
 					}
 				})

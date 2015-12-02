@@ -28,14 +28,21 @@ class Check {
 				(done) => { that.DS.readContent(done) },
 				(done) => { that.ML.testSend(done) }
 			], (err, results) => {
-				that.handleErrors(err, results, callback)
+				if (!err) {
+					that.validate = true
+					process.stdout.write('Testes finalizados com sucesso.')
+					process.exit(1)
+					callback(null)
+				} else {
+					that.handleErrors(err, results, callback)
+				}
 			})
 		}
 	}
 
 	handleErrors (err, results, callback) {
 		if (err) {
-			process.stdout.write(err)
+			process.stdout.write(err.toString())
 			process.exit(1)
 		}
 		callback(null, results)

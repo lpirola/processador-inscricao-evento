@@ -5,6 +5,7 @@ class Mailer {
 		this.mail_service = process.env['MAIL_SERVICE']
 		this.mail_user    = process.env['MAIL_USER']
 		this.mail_pass    = process.env['MAIL_PASS']
+		this.validate = false
 
 		this.transporter = nodemailer.createTransport({
 			service: this.mail_service,
@@ -14,7 +15,7 @@ class Mailer {
 			}
 		}, {
 			// default values for sendMail method
-			from: 'nao-responda@forumsocialportoalegre.org.br',
+			from: 'Fórum Social Porto Alegre <contato@forumsocialportoalegre.org.br>',
 		})
 	}
 
@@ -26,6 +27,7 @@ class Mailer {
 	}
 
 	testSend (done) {
+		let that = this
 		this.transporter.sendMail({
 			to: 'lucaspirola@gmail.com',
 			subject: 'hello',
@@ -34,6 +36,7 @@ class Mailer {
 			if (err) {
 				done('Não foi possível enviar o email de teste.', null)
 			} else {
+				that.validate = true
 				done(null, info.response.toString())
 			}
 		});

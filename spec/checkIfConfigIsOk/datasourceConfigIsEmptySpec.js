@@ -1,6 +1,5 @@
 import Check from '../../src/check'
 
-var chk
 describe('Datasource config is empty', () => {
 	beforeAll(() => {
 		spyOn(process, 'exit')
@@ -10,7 +9,7 @@ describe('Datasource config is empty', () => {
 		process.env['MAIL_USER'] = 'teste@teste.com'
 		process.env['MAIL_PASS'] = '123'
 
-		chk = new Check()
+		let chk = new Check()
 		chk.isValid()
 
 	})
@@ -21,8 +20,7 @@ describe('Datasource config is empty', () => {
 	})
 	it('And Datasource config is empty', () => {
 		expect(process.env['GOOGLE_SPREADSHEET_KEY']).toBeUndefined()
-		expect(process.env['GOOGLE_CLIENT_EMAIL']).toBeUndefined()
-		expect(process.env['GOOGLE_PRIVATE_KEY']).toBeUndefined()
+		expect(process.env['GOOGLE_CREDS']).toBeUndefined()
 	})
 	it('When Developer try to check if config is ok', () => {})
 
