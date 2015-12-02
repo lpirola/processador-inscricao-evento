@@ -1,4 +1,9 @@
 
+import Filter from '../../src/process/filter'
+import Action from '../../src/process/action'
+import Process from '../../src/process/index'
+
+var prc;
 describe('Filter is empty', () => {
 		it('Given E-mail is configured and could be send')
 		it('And Datasource is configured, acessible and not empty')
