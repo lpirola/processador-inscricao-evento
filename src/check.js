@@ -6,6 +6,7 @@ class Check {
 	constructor () {
 		this.DS = new Datasource()
 		this.ML = new Mailer()
+		this.validate = false
 	}
 
 	setMailerTransporter (transporter) {

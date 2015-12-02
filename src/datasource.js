@@ -5,10 +5,10 @@ class Datasource {
 	constructor () {
 		this.google_spreadsheet_key = process.env['GOOGLE_SPREADSHEET_KEY']
 		this.creds = null
+		this.validate = false
 		if (process.env['GOOGLE_CREDS']) {
 			this.creds = JSON.parse(process.env['GOOGLE_CREDS'])
 		}
-		this.validate = false
 	}
 
 	isConfigEmpty () {
