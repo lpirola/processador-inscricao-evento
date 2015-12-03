@@ -9,6 +9,10 @@ Processador de inscrições em eventos que utiliza uma planilha no Google Drive 
 * Nodemailer
 * Google Speadsheet
 
+## Modo de usar coluna status
+
+A sequência e os valores disponíveis são: "", "Boleto Enviado", "Boleto Pago", "Confirmado", "Inválido"
+
 ## Adicionar variáveis de ambiente
 
 ```

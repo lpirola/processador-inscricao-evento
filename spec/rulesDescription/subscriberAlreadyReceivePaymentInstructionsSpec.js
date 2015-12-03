@@ -1,7 +1,22 @@
+import Rules from '../../src/rules'
+import Util from '../util'
+
 describe('Subscriber already receive payment instructions (Rule 1)', () => {
-	it('Given Datasource has at least 1 row')
-	it('And Subscriber email is valid and status is "Boleto Enviado"')
-	it('When Subscriber not fit rules')
-	it('Then Subscriber should not be changed')
-	it('And Subscriber status should be "Boleto Enviado"')
+	beforeAll(function() {
+		let u = new Util()
+		this.rl = new Rules(u.validDatasource())
+	})
+	it('Given Datasource has at least 1 row', function () {
+		expect(this.rl.rows.length).toEqual(2)
+	})
+	it('And Subscriber email is valid and status is "Boleto Enviado"', function () {
+		expect(this.rl.rows[0]["e-mail"]).toBe(true) // validate
+		expect(this.rl.rows[0]["status"]).toEqual('Boleto Enviado')
+	})
+	it('When Subscribers not fit rules', function () {
+		expect(this.rl.validate()).toBe(true)
+	})
+	it('Then Subscriber should not be changed', function () {
+		expect(this.rl.rows[0]["status"]).toEqual('Boleto Enviado')
+	})
 })
