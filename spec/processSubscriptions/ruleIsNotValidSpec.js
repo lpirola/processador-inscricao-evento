@@ -1,10 +1,10 @@
-import Rules from '../../src/rules'
+import RegistrationRule from '../../src/rules/onRegister'
 import Process from '../../src/process'
 import nodemailer from 'nodemailer'
 import stubTransport from 'nodemailer-stub-transport'
 
 var prc
-describe('One Filter is not valid', () => {
+describe('Rules has invalid options', () => {
 	beforeAll(function (done) {
 		// spyOn(prc, 'check').and.returnValue(true)
 		spyOn(process, 'exit')
@@ -26,8 +26,8 @@ describe('One Filter is not valid', () => {
 		expect(this.prc.validate).toBe(true)
 	})
 	it('And Rules has invalid options', function () {
-				let fil = new Filter()
-		this.prc.addFilter(fil)
+		let reg = new RegistrationRule()
+		this.prc.addRule(reg)
 	})
 	it('When Developer try to process all subscriptions', function (done) {
 		this.prc.run(done)
