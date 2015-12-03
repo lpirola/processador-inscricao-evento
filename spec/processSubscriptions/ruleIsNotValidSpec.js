@@ -1,6 +1,5 @@
-import Filter from '../../src/process/filter'
-import Action from '../../src/process/action'
-import Process from '../../src/process/index'
+import Rules from '../../src/rules'
+import Process from '../../src/process'
 import nodemailer from 'nodemailer'
 import stubTransport from 'nodemailer-stub-transport'
 
@@ -26,13 +25,9 @@ describe('One Filter is not valid', () => {
 	it('Given E-mail and Datasource is configured and valid', function () {
 		expect(this.prc.validate).toBe(true)
 	})
-	it('And Filters is not a pattern', function () {
-		let fil = new Filter()
+	it('And Rules has invalid options', function () {
+				let fil = new Filter()
 		this.prc.addFilter(fil)
-	})
-	it('And Actions is not a pattern', function () {
-		let act = new Action()
-		this.prc.addAction(act)
 	})
 	it('When Developer try to process all subscriptions', function (done) {
 		this.prc.run(done)

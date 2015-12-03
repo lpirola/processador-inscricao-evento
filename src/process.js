@@ -1,5 +1,5 @@
-import Check from '../check'
-import Datasource from '../datasource'
+import Check from './check'
+import Datasource from './datasource'
 import async from 'async'
 
 class Process {
