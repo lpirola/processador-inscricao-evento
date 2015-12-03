@@ -1,10 +1,11 @@
-class Register {
+class Rule {
 	constructor (SpreadsheetRow) {
 		this.rows = SpreadsheetRow
 	}
 
-	validateSubscriber () {
+	validate () {
+		return true
 	}
 }
 
-export default Register
+export default Rule
