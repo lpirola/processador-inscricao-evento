@@ -13,8 +13,12 @@ describe('Subscriber made payment at bank (Rule 2)', () => {
 		expect(this.rl.rows[0]["e-mail"]).toBe(true) // validate
 		expect(this.rl.rows[0]["status"]).toEqual('Boleto Pago')
 	})
-	it('When Organizer check if Subscribers fit rules', function () {
-		expect(this.rl.validate()).toBe(true)
+	it('When Organizer check if Subscribers fit rules', function (done) {
+		let that = this
+		that.rl.validate(function(err, results) {
+			expect(that.rl.valid).toBe(true)
+			done(err, results)
+		})
 	})
 	it('Then set Subscriber status to "Confirmado"', function () {
 		expect(this.rl.rows[0]["status"]).toEqual('Confirmado')

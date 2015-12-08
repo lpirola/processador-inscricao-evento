@@ -32,23 +32,23 @@ class Mailer {
 
 	send (to, subject, content, done) {
 		let that = this
-		this.transporter.sendMail({
+		return this.transporter.sendMail({
 			to: to,
 			subject: subject,
 			text: content
-		}, (err, info) => {
+		}, function (err, info) {
 			if (err) {
-				done('Não foi possível enviar o email de teste.', null)
+				return done('Não foi possível enviar o email de teste.', null)
 			} else {
 				that.validate = true
-				done(null, info.response.toString())
+				return done(null, info.response.toString())
 			}
 		});
 
 	}
 
 	testSend (done) {
-		this.send('lucaspirola@gmail.com', 'hello', 'hello world!', done)
+		return this.send('lucaspirola@gmail.com', 'hello', 'hello world!', done)
 	}
 }
 

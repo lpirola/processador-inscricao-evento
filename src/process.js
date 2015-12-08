@@ -3,6 +3,7 @@ import Datasource from './datasource'
 import async from 'async'
 import Mailer from './mailer'
 import Rules from './rules/index'
+
 class Process {
 	constructor () {
 		this.CK = new Check()
@@ -53,21 +54,22 @@ class Process {
 	parseRules (sheet_content, done) {
 		let r = new Rules(sheet_content)
 		r.setMailer(this.ML)
-		if(!r.validate()){
-			done('Falha ao validar email dos inscritos')
-		}
-		done(null)
+		r.validate(function(err, results) {
+			if (err) {
+				done('Falha ao validar email dos inscritos')
+			} else {
+				done(null, results)
+			}
+		})
 	}
 
 	addRule (rule) {
 		this._rules.push(rule)
 	}
 
-	reset () {
-		this._rules = []
+	getRules () {
+		return this._rules
 	}
-
-	get rules () { return this._rules }
 }
 
 export default Process

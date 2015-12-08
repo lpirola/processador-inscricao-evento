@@ -13,8 +13,12 @@ describe('Subscriber already receive payment instructions (Rule 1)', () => {
 	it('And Subscriber email is valid and status is "Boleto Enviado"', function () {
 		expect(this.rl.rows[0]["status"]).toEqual('Boleto Enviado')
 	})
-	it('When Subscribers not fit rules', function () {
-		expect(this.rl.validate()).toBe(true)
+	it('When Subscribers not fit rules', function (done) {
+		let that = this
+		that.rl.validate(function(err, results) {
+			expect(that.rl.valid).toBe(false)
+			done(err, results)
+		})
 	})
 	it('Then Subscriber should not be changed', function () {
 		expect(this.rl.rows[0]["status"]).toEqual('Boleto Enviado')

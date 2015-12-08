@@ -20,8 +20,12 @@ describe('Subscriber has invalid email (Rules)', () => {
 	it('And One Subscriber has invalid email', function() {
 		expect(this.rl.rows[0]["e-mail"]).toEqual('inválidoemail/.com')
 	})
-	it('When Organizer check if Subscriber fit rules', function () {
-		expect(this.rl.validate()).toBe(false)
+	it('When Organizer check if Subscriber fit rules', function (done) {
+		let that = this
+		that.rl.validate(function(err, results) {
+			expect(that.rl.valid).toBe(false)
+			done(err, results)
+		})
 	})
 	it('Then Organizer must receive a email warning about spreadsheet error', function () {
 		expect(this.rl.invalidateSubscriber).toHaveBeenCalled()
