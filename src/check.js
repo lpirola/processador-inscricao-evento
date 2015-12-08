@@ -9,6 +9,10 @@ class Check {
 		this.validate = false
 	}
 
+	setMailer (mailer) {
+		this.ML = mailer
+	}
+
 	isValid (callback = (err, results) => {}) {
 		let that = this
 
@@ -21,15 +25,18 @@ class Check {
 		} else {
 			// valida datasource
 			async.series([
-				(done) => { that.DS.testConnection(done) },
-				(done) => { that.DS.readContent(done) },
-				(done) => { that.ML.testSend(done) }
-			], (err, results) => {
+				function (done) { that.DS.testConnection(done) },
+				function (done) { that.DS.readContent(done) },
+				function (done) { that.ML.testSend(done) }
+			], function (err, results) {
 				if (!err) {
 					that.validate = true
-					process.stdout.write('Testes finalizados com sucesso.')
+					process.stdout.write([
+						'-> Checagem de conexão com a planilha ok.',
+						'-> Checagem de envio de e-mail ok.'
+					].join('\n'))
 					process.exit(1)
-					callback(null)
+					callback(null, that)
 				} else {
 					that.handleErrors(err, results, callback)
 				}

@@ -1,6 +1,7 @@
 import GoogleSpreadsheet from 'google-spreadsheet'
 import async from 'async'
 
+// TODO: melhorar trafego das mensagens de erro e acerto para fora da classe
 class Datasource {
 	constructor () {
 		this.google_spreadsheet_key = process.env['GOOGLE_SPREADSHEET_KEY']
@@ -37,13 +38,13 @@ class Datasource {
 		let doc = new GoogleSpreadsheet(this.google_spreadsheet_key)
 		let worksheet_id = '';
 		let that = this
-		async.series([
+		async.waterfall([
 			// Tenta autenticar com credenciais do ambiente
 			function(done) {
 				if (that.creds) {
 					doc.useServiceAccountAuth(that.creds, done)
 				} else {
-					done(null, true)
+					done(null)
 				}
 			},
 			// Testa conexão e retorna infos básicas da planilha
@@ -59,7 +60,7 @@ class Datasource {
 				})
 			},
 			// Lê conteúdo e certifica-se que planilha não está vazia
-			function(done) {
+			function(sheetinfo, done) {
 				doc.getRows(worksheet_id, {}, function (err, results) {
 					if (err) {
 						done('Problema ao tentar ler detalhes da planilha' + err, null)

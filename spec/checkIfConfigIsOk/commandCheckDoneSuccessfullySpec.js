@@ -36,8 +36,8 @@ describe('Command check done successfully', () => {
 		chk.isValid(done)
 	})
 	it('Then Process should output a message with success details from configs tests', () => {
-		expect(process.stdout.write.calls.argsFor(2))
-			.toEqual(['Testes finalizados com sucesso.'])
+		expect(process.stdout.write.calls.argsFor(2)[0])
+			.toEqual(['-> Checagem de conexão com a planilha ok.', '-> Checagem de envio de e-mail ok.'].join('\n'))
 	});
 	it('And process must stop', () => {
 		expect(process.exit.calls.count()).toBe(1);
