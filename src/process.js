@@ -3,6 +3,7 @@ import Datasource from './datasource'
 import async from 'async'
 import Mailer from './mailer'
 import Rules from './rules/index'
+import onRegister from './rules/onRegister'
 
 class Process {
 	constructor () {
@@ -29,7 +30,7 @@ class Process {
 		})
 	}
 
-	run (callback) {
+	run (callback = (err, results) => {}) {
 		let that = this
 		async.waterfall([
 			function (done) { that.readDatasource(done) },
@@ -52,11 +53,11 @@ class Process {
 	}
 
 	parseRules (sheet_content, done) {
-		let r = new Rules(sheet_content)
+		let r = new onRegister(sheet_content)
 		r.setMailer(this.ML)
 		r.validate(function(err, results) {
 			if (err) {
-				done('Falha ao validar email dos inscritos')
+				done('Falha ao validar email dos inscritos ' + err.toString())
 			} else {
 				done(null, results)
 			}

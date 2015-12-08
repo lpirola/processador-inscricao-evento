@@ -43,7 +43,7 @@ class Rule {
 	}
 
 	warningOrganizer(row, done) {
-		this.ML.send ('lucaspirola@gmail.com', 'email inválido encontrado na planilha', 'conteúdo da planilha', done)
+		return this.ML.send ('lucaspirola@gmail.com', 'email inválido encontrado na planilha', 'conteúdo da planilha', done)
 	}
 
 	addActions() {

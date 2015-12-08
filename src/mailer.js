@@ -15,7 +15,8 @@ class Mailer {
 			}
 		}, {
 			// default values for sendMail method
-			from: 'Fórum Social Porto Alegre <contato@forumsocialportoalegre.org.br>',
+			from: 'Fórum Social Porto Alegre <nao-responda@forumsocialportoalegre.org.br>',
+			replyTo: 'espaco.fsm.poa@gmail.com'
 		})
 	}
 
