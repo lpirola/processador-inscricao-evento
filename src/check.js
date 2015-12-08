@@ -9,10 +9,6 @@ class Check {
 		this.validate = false
 	}
 
-	setMailerTransporter (transporter) {
-		this.ML.transporter = transporter
-	}
-
 	isValid (callback = (err, results) => {}) {
 		let that = this
 

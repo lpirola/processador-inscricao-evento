@@ -1,6 +1,5 @@
 import Check from '../../src/check'
-import nodemailer from 'nodemailer'
-import stubTransport from 'nodemailer-stub-transport'
+import Util from '../util'
 
 describe('E-mail could not be send with SMTP server', () => {
 	beforeAll((done) => {
@@ -13,10 +12,10 @@ describe('E-mail could not be send with SMTP server', () => {
 		process.env['GOOGLE_SPREADSHEET_KEY'] = '1gKGxto-RDqS5k2F3TbLXnOoj6IB6RFp18K_MUzBP_Hw'
 
 		let chk = new Check()
-		let transp = nodemailer.createTransport(stubTransport({
+		let u = new Util()
+		chk.ML.setTransporter(u.mailerTransport({
 			error: new Error('Invalid recipient')
 		}))
-		chk.setMailerTransporter(transp)
 		chk.isValid(done)
 	})
 	it('Given SMTP server details is filled', () => {

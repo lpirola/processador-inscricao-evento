@@ -19,6 +19,10 @@ class Mailer {
 		})
 	}
 
+	setTransporter (transporter) {
+		this.transporter = transporter
+	}
+
 	isConfigEmpty () {
 		if (!this.mail_service || !this.mail_user || !this.mail_pass) {
 			return false
@@ -26,12 +30,12 @@ class Mailer {
 		return true
 	}
 
-	testSend (done) {
+	send (to, subject, content, done) {
 		let that = this
 		this.transporter.sendMail({
-			to: 'lucaspirola@gmail.com',
-			subject: 'hello',
-			text: 'hello world!'
+			to: to,
+			subject: subject,
+			text: content
 		}, (err, info) => {
 			if (err) {
 				done('Não foi possível enviar o email de teste.', null)
@@ -40,6 +44,11 @@ class Mailer {
 				done(null, info.response.toString())
 			}
 		});
+
+	}
+
+	testSend (done) {
+		this.send('lucaspirola@gmail.com', 'hello', 'hello world!', done)
 	}
 }
 

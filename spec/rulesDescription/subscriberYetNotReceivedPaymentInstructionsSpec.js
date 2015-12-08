@@ -10,12 +10,11 @@ describe('Subscriber yet not received payment instructions (Rule 1)', () => {
 		expect(this.rl.rows.length).toEqual(2)
 	})
 	it('And Subscriber email is valid and status is ""', function () {
-		expect(this.rl.rows[0]["e-mail"]).toBe(true) // validate
+		expect(this.rl.validateEmail(this.rl.rows[0]["e-mail"])).toBe(true) // validate
 		expect(this.rl.rows[0]["status"]).toEqual('')
 	})
 	it('When Organizer check if Subscribers fit rules', function () {
-		expect(this.rl.validate()).toBe(true)
-		expect(this.rl.rows[0]["status"]).toEqual('')
+		expect(this.rl.run()).toBe(true)
 	})
 	it('Then set Subscriber status to "Boleto Enviado"', function () {
 		expect(this.rl.rows[0]["status"]).toEqual('Boleto Enviado')

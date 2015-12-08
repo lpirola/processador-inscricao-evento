@@ -1,6 +1,5 @@
 import Check from '../../src/check'
-import nodemailer from 'nodemailer'
-import stubTransport from 'nodemailer-stub-transport'
+import Util from '../util'
 
 var chk
 describe('Command check done successfully', () => {
@@ -14,8 +13,8 @@ describe('Command check done successfully', () => {
 		process.env['GOOGLE_SPREADSHEET_KEY'] = '1gKGxto-RDqS5k2F3TbLXnOoj6IB6RFp18K_MUzBP_Hw'
 
 		chk = new Check()
-		let transp = nodemailer.createTransport(stubTransport())
-		chk.setMailerTransporter(transp)
+		let u = new Util()
+		chk.ML.setTransporter(u.mailerTransport())
 	})
 	it('Given Email is configured and could be send', (done) => {
 		expect(process.stdout.write.calls.any()).toBe(false)

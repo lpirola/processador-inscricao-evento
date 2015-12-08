@@ -10,10 +10,6 @@ class Process {
 		this.validate = false
 	}
 
-	setMailerTransporter (transport) {
-		this.CK.setMailerTransporter(transport)
-	}
-
 	check (done) {
 		let that = this
 		this.CK.isValid(function(err, results) {
@@ -22,13 +18,6 @@ class Process {
 		})
 	}
 
-	addRule (rule) {
-		this._rules.push(rule)
-	}
-
-	reset () {
-		this._rules = []
-	}
 	run (callback) {
 		let that = this
 		async.series([
@@ -50,6 +39,14 @@ class Process {
 	parseRules (done) {
 		// console.log(this.DS.content)
 		done(null)
+	}
+
+	addRule (rule) {
+		this._rules.push(rule)
+	}
+
+	reset () {
+		this._rules = []
 	}
 
 	get rules () { return this._rules }
