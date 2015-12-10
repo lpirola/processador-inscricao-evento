@@ -2,14 +2,12 @@ import async from 'async'
 import Mailer from './../mailer'
 
 /**
- * Essa classe será extendida por outras na criação de novas regras
- * Ela é responsável pela execução de ações de acordo com o filtro definido.
- *
- * E a regra básica implementada nessa classe é a de validação de e-mail.
+ * Implementa a de validação de e-mail, execução de ações de acordo com o filtro definido
+ * e deve ser extendida na criação de novas regras
  */
 class Rule {
 	/**
-	 * @param {SpreadsheetRow []=} rows - Lista de linhas disponíveis para verificação
+	 * @param {SpreadsheetRow[]} rows - Lista de linhas disponíveis para verificação
 	 * @construct
 	 */
 	constructor (rows = []) {
@@ -22,7 +20,7 @@ class Rule {
 
 	/**
 	 * Valida o e-mail presente na linha da planilha em análise
-	 * @param {string[]} row - linha da planilha em análise
+	 * @param {string[]} row - Linha da planilha contendo informações do participante
 	 * @returns {Boolean} - retorna verdadeiro se e-mail for inválido,
 	 * truque para ação ser executada filtro é inválido
 	 * @abstract

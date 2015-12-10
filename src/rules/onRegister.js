@@ -1,18 +1,35 @@
 import Rules from './index'
 import async from 'async'
 
+/**
+ * Implementa verificação no participante se já recebeu informações
+ * para pagamento, as envia em caso negativo e realiza mudança de
+ * status do participante na planilha
+ */
 class Register extends Rules{
+
 	addActions() {
 		this._actions.push('sendInstructions')
 		this._actions.push('markSubscriberReceivedInstructions')
 	}
 
-
+	/**
+	 * Valida se a linha está com a coluna status em branco e possui e-mail válido
+	 * @param {string[]} row - Linha da planilha contendo informações do participante
+	 * @return {Boolean}
+	 * @public
+	 */
 	filter (row) {
 		// pegadinha com "!" por causa da validação por e-mail
 		return (!super.filter(row)) && (row['status'] === '')
 	}
 
+	/**
+	 * Envia instruções para pagamento
+	 * @param {Spreadsheetrow[]} row - linha que será passada para as ações
+	 * @param {Function} done2 - callback
+	 * @protected
+	 */
 	sendInstructions (row, done) {
 		let data = {
 			email : row['e-mail'],
@@ -32,7 +49,11 @@ A confirmação da inscrição será enviada assim que recebermos do banco respo
 
 Obrigado!`, done)
 	}
-
+	/**
+	 * @param {Spreadsheetrow[]} row - linha que será passada para as ações
+	 * @param {Function} done2 - callback
+	 * @protected
+	 */
 	markSubscriberReceivedInstructions (row, done) {
 		let that = this
 		row.status = 'Boleto Enviado'
