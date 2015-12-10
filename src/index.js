@@ -1,29 +1,18 @@
 #!/usr/bin/env node
 import program from 'commander'
-import Check from './check'
-import Process from './process'
+import Command from './command'
 
-import onRegister from './rules/onRegister'
-import onConfirmation from './rules/onConfirmation'
-
-let prc = new Process()
-let chk = new Check()
+let c = new Command()
 program
 	.version('0.0.1')
 	.description('Processador de inscrições de evento')
+
 	.command('process')
 	.option('-r, --register', 'Envia o boleto para os participantes cadastrados')
 	.option('-c, --confirm', 'Confirma o pagamento para os participantes que pagaram')
-	.action(function(options) {
-		if (options.register) {
-			prc.setRule(new onRegister())
-		} else if (options.confirm) {
-			prc.setRule(new onConfirmation())
-		}
-		prc.run()
-	})
+	.action(c.process)
+
 	.command('check')
-	.action(function () {
-		chk.isValid()
-	})
+	.action(c.check)
+
 program.parse(process.argv)
