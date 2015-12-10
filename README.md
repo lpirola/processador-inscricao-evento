@@ -1,6 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/lpirola/processador-inscricao-evento.png?label=ready&title=Ready)](https://waffle.io/lpirola/processador-inscricao-evento)
-# processador-inscricao-evento
-Processador de inscrições em eventos que utiliza uma planilha no Google Drive para controlar o envio de e-mail com boleto para pagamento e confirmação da inscrição
+# Processador de instricões em eventos
+É utilizado uma planilha no Google Drive para controlar o envio de e-mail com boleto para pagamento e confirmação da inscrição.
 
 ## Dependências
 
@@ -30,10 +30,20 @@ export GOOGLE_CREDS='{"type": "service_account","private_key_id": "","private_ke
 ./node_modules/.bin/babel-node src process
 ```
 
+## Docs
+
+Para ver a documentação, é necessário rodar os comandas abaixo. Na conclusão, será criado uma pasta chamada docs, que conterá arquivos html gerados para facilitar navegação
+
+```
+npm install --dev
+npm run generate-docs
+```
+
 ## Testes
 
 Para rodar os testes, as variáveis de ambiente não podem estar definidas. Algumas planilhas são utilizadas para realizar os testes. https://drive.google.com/folderview?id=0Bzc8qNdwn4IRcnNHYW1NMVZHUW8&usp=sharing
 
 ```
+npm install --dev
 npm test
 ```

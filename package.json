@@ -4,7 +4,8 @@
   "description": "Processador de inscrições em eventos que utiliza uma planilha no Google Drive para controlar o envio de e-mail para pagamento e para confirmação da inscrição",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine"
+    "test": "./node_modules/.bin/jasmine",
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
   "repository": {
     "type": "git",
@@ -25,11 +26,12 @@
     "async": "^1.5.0",
     "commander": "^2.9.0",
     "google-spreadsheet": "^1.0.1",
-    "jasmine-es6": "0.0.18",
     "nodemailer": "^1.10.0"
   },
   "devDependencies": {
     "babel-cli": "^6.2.1",
+    "minami": "^1.1.1",
+    "jasmine-es6": "0.0.18",
     "nodemailer-stub-transport": "^1.0.0"
   }
 }
