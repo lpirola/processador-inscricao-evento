@@ -11,13 +11,13 @@ let chk = new Check()
 program
 	.version('0.0.1')
 	.description('Processador de inscrições de evento')
+	.command('process')
 	.option('-r, --register', 'Envia o boleto para os participantes cadastrados')
 	.option('-c, --confirm', 'Confirma o pagamento para os participantes que pagaram')
-	.command('process')
-	.action(function() {
+	.action(function(options) {
 		if (options.register) {
 			prc.setRule(new onRegister())
-		} else if (options.confirmation) {
+		} else if (options.confirm) {
 			prc.setRule(new onConfirmation())
 		}
 		prc.run()

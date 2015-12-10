@@ -57,7 +57,7 @@ class Process {
 		r.setMailer(this.ML)
 		r.validate(function(err, results) {
 			if (err) {
-				done('Falha ao validar email dos inscritos ' + err.toString())
+				done('Falha ao processar os inscritos ' + err.toString())
 			} else {
 				done(null, results)
 			}
