@@ -2,14 +2,11 @@ import Rules from './index'
 import async from 'async'
 
 class Register extends Rules{
-	constructor (SpreadsheetRows) {
-		super(SpreadsheetRows)
-	}
-
 	addActions() {
 		this._actions.push('sendInstructions')
 		this._actions.push('markSubscriberReceivedInstructions')
 	}
+
 
 	filter (row) {
 		// pegadinha com "!" por causa da validação por e-mail
@@ -37,8 +34,12 @@ Obrigado!`, done)
 	}
 
 	markSubscriberReceivedInstructions (row, done) {
+		let that = this
 		row.status = 'Boleto Enviado'
-		return row.save(done)
+		return row.save(function (err, results) {
+			that.valid = true
+			done(err, results)
+		})
 	}
 }
 

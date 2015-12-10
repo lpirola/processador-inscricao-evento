@@ -2,15 +2,14 @@ import Check from './check'
 import Datasource from './datasource'
 import async from 'async'
 import Mailer from './mailer'
-import Rules from './rules/index'
-import onRegister from './rules/onRegister'
+import Rule from './rules/index'
 
 class Process {
 	constructor () {
 		this.CK = new Check()
 		this.DS = new Datasource()
 		this.setMailer()
-		this._rules = []
+		this._rule = new Rule([])
 		this.finished = false
 	}
 
@@ -53,7 +52,8 @@ class Process {
 	}
 
 	parseRules (sheet_content, done) {
-		let r = new onRegister(sheet_content)
+		let r = this.getRule()
+		r.setRows(sheet_content)
 		r.setMailer(this.ML)
 		r.validate(function(err, results) {
 			if (err) {
@@ -64,12 +64,12 @@ class Process {
 		})
 	}
 
-	addRule (rule) {
-		this._rules.push(rule)
+	setRule (rule) {
+		this._rule = rule
 	}
 
-	getRules () {
-		return this._rules
+	getRule () {
+		return this._rule
 	}
 }
 

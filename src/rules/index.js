@@ -32,7 +32,6 @@ class Rule {
 				done(null, row)
 			}
 		}, function (err, results) {
-			that.valid = true
 			return done2(err, results)
 		})
 	}
@@ -47,8 +46,8 @@ class Rule {
 	}
 
 	addActions() {
-		this._actions.push('invalidateSubscriber')
 		this._actions.push('warningOrganizer')
+		this._actions.push('invalidateSubscriber')
 	}
 
 	getActions() {
@@ -57,6 +56,10 @@ class Rule {
 
 	setMailer (mailer) {
 		this.ML = mailer
+	}
+
+	setRows (content) {
+		this.rows = content
 	}
 }
 

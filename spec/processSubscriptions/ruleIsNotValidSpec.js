@@ -1,11 +1,8 @@
-import RegistrationRule from '../../src/rules/onRegister'
+import onRegister from '../../src/rules/onRegister'
 import Process from '../../src/process'
 import Mailer from '../../src/mailer'
 import Util from '../util'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000
-
-var prc
 describe('Rules has invalid options', () => {
 	beforeAll(function () {
 		spyOn(process, 'exit')
@@ -13,16 +10,13 @@ describe('Rules has invalid options', () => {
 		process.env['MAIL_SERVICE'] = 'Gmail';
 		process.env['MAIL_USER'] = 'teste@teste.com';
 		process.env['MAIL_PASS'] = '123';
-		process.env['GOOGLE_SPREADSHEET_KEY'] = '1gKGxto-RDqS5k2F3TbLXnOoj6IB6RFp18K_MUzBP_Hw'
+		process.env['GOOGLE_SPREADSHEET_KEY'] = '1ptzoR99AfWHBiJW4vrzeAc05Ca_d7ykUIdkLyA4oDMs'
 		let u = new Util()
 		let m = new Mailer()
 		m.setTransporter(u.mailerTransport())
 
-		prc = new Process()
-		prc.setMailer(m)
-	})
-	beforeEach(function () {
-		this.prc = prc
+		this.prc = new Process()
+		this.prc.setMailer(m)
 		spyOn(this.prc, 'readDatasource').and.callThrough()
 		spyOn(this.prc, 'parseRules').and.callThrough()
 	})
@@ -37,7 +31,7 @@ describe('Rules has invalid options', () => {
 		})
 	})
 	it('And Rules has invalid options', function () {
-		this.prc.addRule('')
+		this.prc.setRule(new onRegister([]))
 	})
 	it('When Developer try to process all subscriptions', function (done) {
 		let that = this

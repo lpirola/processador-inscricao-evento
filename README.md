@@ -32,7 +32,7 @@ export GOOGLE_CREDS='{"type": "service_account","private_key_id": "","private_ke
 
 ## Testes
 
-Para rodar os testes, as variáveis de ambiente não podem estar definidas
+Para rodar os testes, as variáveis de ambiente não podem estar definidas. Algumas planilhas são utilizadas para realizar os testes. https://drive.google.com/folderview?id=0Bzc8qNdwn4IRcnNHYW1NMVZHUW8&usp=sharing
 
 ```
 npm test
