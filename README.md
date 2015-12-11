@@ -1,4 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/lpirola/processador-inscricao-evento.png?label=ready&title=Ready)](https://waffle.io/lpirola/processador-inscricao-evento)
+[![Documentation](https://doc.esdoc.org/github.com/lpirola/processador-inscricao-evento/badge.svg)](https://doc.esdoc.org/github.com/lpirola/processador-inscricao-evento/)
+
 # Processador de instricões em eventos
 É utilizado uma planilha no Google Drive para controlar o envio de e-mail com boleto para pagamento e confirmação da inscrição.
 
