@@ -5,9 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var browserify = require('browserify-middleware');
+var stylus = require('stylus');
+var jeet = require('jeet');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var datasources = require('./routes/datasources');
 
 var app = express();
 
@@ -21,19 +23,29 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('stylus').middleware(path.join(__dirname, 'public')));
+app.use(stylus.middleware({
+	src: __dirname + '/stylus',
+	dest: __dirname + '/public',
+	compile: function (str, path) {
+		return stylus(str)
+		.set('filename', path)
+		.set('compress', true)
+		.use(jeet())
+		.import('jeet');
+	}
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/js/main.js', browserify(__dirname + '/client/index.js'));
+app.get('/main.js', browserify(__dirname + '/client/index.js'));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/datasources', datasources);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 // error handlers
@@ -41,23 +53,23 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
+	app.use(function(err, req, res, next) {
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: err
+		});
+	});
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+	res.status(err.status || 500);
+	res.render('error', {
+		message: err.message,
+		error: {}
+	});
 });
 
 
