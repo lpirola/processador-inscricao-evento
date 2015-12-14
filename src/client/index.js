@@ -1,52 +1,79 @@
 var m = require('mithril')
 
+var Datasource = function(data) {
+    data = data || {}
+    this.id = m.prop(data.id)
+    this.key = m.prop(data.key)
+    this.interval_update = m.prop(data.interval_update)
+}
+Datasource.list = function(data) {
+    return m.request({method: "GET", url: "/datasources", data: data})
+}
+Datasource.save = function(data) {
+    return m.request({method: "POST", url: "/datasources", data: data})
+}
 
+var DatasourceForm = {
+    controller: function(args) {
+        this.ds = m.prop(args.ds || new Datasource())
+    },
+    view: function(ctrl, args) {
+        var ds = ctrl.ds()
 
-var todo = {};
+        return m('.teste', [
+			m('h1', 'Processador de inscrições (beta)'),
+			m('.half', [
+				m('.pure-form.pure-form-aligned', [
+					m('h2', 'Adicionar planilha'),
+					m('.pure-control-group', [
+						m('label', 'Chave da planilha no Google Drive'),
+						m("input[placeholder=Ex.: 1gKGxto-RDqS5k2F3TbLXnOoj6IB6RFp18K_MUzBP_Hw]",
+							{onchange: m.withAttr("value", ds.key), value: ds.key()})
+					]),
+					m('.pure-control-group', [
+						m('label', 'Intervalo atualização (ms)'),
+						m("input[placeholder=Ex. 3600ms = 60s",
+							{onchange: m.withAttr("value", ds.interval_update), value: ds.interval_update()})
+					]),
+					m('.pure-controls', [
+						m("button.pure-button.pure-button-primary", {onclick: args.onsave.bind(this,ds)}, "Salvar")
+					])
+				])
+			])
+        ])
+    }
+}
 
-//for simplicity, we use this component to namespace the model classes
+var DatasourceList = {
+    view: function(ctrl, args) {
+        return m('.half.active-spreadsheets', [
+			m('h2', 'Planilhas ativas'),
+			m("table", [
+				args.ds().map(function(ds) {
+					return m("tr", [
+						m("td", ds.id),
+						m("td", ds.key),
+						m("td", ds.interval_update)
+					])
+				})
+			])
+		])
+    }
+}
 
-//the Todo class has two properties
-todo.Todo = function(data) {
-    this.description = m.prop(data.description);
-    this.done = m.prop(false);
-};
+var Home = {
+    controller: function update() {
+        this.datasources = Datasource.list()
+        this.save = function(ds) {
+            Datasource.save(ds).then(update.bind(this))
+        }.bind(this)
+    },
+    view: function(ctrl) {
+        return [
+            m.component(DatasourceForm, {onsave: ctrl.save}),
+            m.component(DatasourceList, {ds: ctrl.datasources})
+        ]
+    }
+}
 
-//the TodoList class is a list of Todo's
-todo.TodoList = Array;
-
-
-
-//model
-var Page = {
-	list: function() {
-		return m.request({method: "GET", url: "/datasources"});
-	}
-};
-
-var Demo = {
-	//controller
-	controller: function() {
-		var pages = Page.list();
-		return {
-			pages: pages,
-			rotate: function() {
-				pages().push(pages().shift());
-			}
-		}
-	},
-
-	//view
-	view: function(ctrl) {
-		return m("div", [
-			ctrl.pages().map(function(page) {
-				return m("a", {href: page.url}, page.title);
-			}),
-			m("button", {onclick: ctrl.rotate}, "Rotate links")
-		]);
-	}
-};
-
-
-//initialize
-m.mount(document.getElementsByTagName("body"), Demo);
+m.mount(document.body, Home);

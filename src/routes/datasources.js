@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-	models.Datasources.create({
+	models.Datasource.create({
 		key: req.body.key,
 		interval_update: req.body.interval_update
 	}).then(function(err, result) {
