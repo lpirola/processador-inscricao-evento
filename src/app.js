@@ -7,9 +7,12 @@ var bodyParser = require('body-parser');
 var browserify = require('browserify-middleware');
 var stylus = require('stylus');
 var jeet = require('jeet');
-
+var kue = require('kue');
+var Queue = require('./modules/queue');
 var routes = require('./routes/index');
 var datasources = require('./routes/datasources');
+
+new Queue();
 
 var app = express();
 
@@ -35,9 +38,9 @@ app.use(stylus.middleware({
 	}
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.get('/main.js', browserify(__dirname + '/client/index.js'));
 
+app.use('/fila', kue.app);
 app.use('/', routes);
 app.use('/datasources', datasources);
 
