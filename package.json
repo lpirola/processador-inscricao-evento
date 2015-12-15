@@ -41,10 +41,10 @@
     "nodemailer": "^1.10.0",
     "sequelize": "^3.14.2",
     "serve-favicon": "~2.3.0",
-    "stylus": "0.42.3"
+    "stylus": "0.42.3",
+    "babel-cli": "^6.2.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.2.1",
     "istanbul": "^0.4.1",
     "jasmine-es6": "0.0.18",
     "minami": "^1.1.1",
