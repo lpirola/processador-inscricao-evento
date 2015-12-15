@@ -11,8 +11,9 @@ router.get('/', function(req, res) {
 
 router.post('/', function(req, res) {
 	models.Datasource.create({
+		name: req.body.name,
 		key: req.body.key,
-		interval_update: req.body.interval_update
+		interval_update: req.body.interval_update*60000
 	}).then(function(err, result) {
 		res.json(result);
 	});
@@ -20,8 +21,9 @@ router.post('/', function(req, res) {
 
 router.put('/', function(req, res) {
 	models.Datasources.upsert({
+		name: req.body.name,
 		key: req.body.key,
-		interval_update: req.body.interval_update
+		interval_update: req.body.interval_update*60000
 	}).then(function(err, result) {
 		res.json(result);
 	});

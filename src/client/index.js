@@ -1,8 +1,9 @@
 var m = require('mithril')
 
 var Datasource = function(data) {
-    data = data || {}
+    data = data || {id:'', name:'', key:'', interval_update:''}
     this.id = m.prop(data.id)
+	this.name = m.prop(data.name)
     this.key = m.prop(data.key)
     this.interval_update = m.prop(data.interval_update)
 }
@@ -26,13 +27,18 @@ var DatasourceForm = {
 				m('.pure-form.pure-form-aligned', [
 					m('h2', 'Adicionar planilha'),
 					m('.pure-control-group', [
+						m('label', 'Nome'),
+						m("input",
+							{onchange: m.withAttr("value", ds.name), value: ds.name()})
+					]),
+					m('.pure-control-group', [
 						m('label', 'Chave da planilha no Google Drive'),
 						m("input[placeholder=Ex.: 1gKGxto-RDqS5k2F3TbLXnOoj6IB6RFp18K_MUzBP_Hw]",
 							{onchange: m.withAttr("value", ds.key), value: ds.key()})
 					]),
 					m('.pure-control-group', [
-						m('label', 'Intervalo atualização (ms)'),
-						m("input[placeholder=Ex. 3600ms = 60s",
+						m('label', 'Intervalo atualização (min)'),
+						m("input",
 							{onchange: m.withAttr("value", ds.interval_update), value: ds.interval_update()})
 					]),
 					m('.pure-controls', [
@@ -52,6 +58,7 @@ var DatasourceList = {
 				args.ds().map(function(ds) {
 					return m("tr", [
 						m("td", ds.id),
+						m("td", ds.name),
 						m("td", ds.key),
 						m("td", ds.interval_update)
 					])

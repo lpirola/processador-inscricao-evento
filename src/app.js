@@ -12,7 +12,8 @@ var Queue = require('./modules/queue');
 var routes = require('./routes/index');
 var datasources = require('./routes/datasources');
 
-new Queue();
+
+Queue.init();
 
 var app = express();
 

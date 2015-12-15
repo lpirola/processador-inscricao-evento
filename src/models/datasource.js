@@ -2,8 +2,9 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Datasource = sequelize.define("Datasource", {
+    name: DataTypes.STRING,
     key: DataTypes.STRING,
-	interval_update: DataTypes.STRING,
+	interval_update: DataTypes.INTEGER,
 	user_id: DataTypes.STRING
   }
   , {
