@@ -5,7 +5,7 @@ describe('Datasource config is empty', () => {
 		process.env['MAIL_SERVICE'] = 'gmail'
 		process.env['MAIL_USER'] = 'teste@teste.com'
 		process.env['MAIL_PASS'] = '123'
-
+		delete(process.env['GOOGLE_CREDS'])
 		this.chk = new Check()
 	})
 	it('Given E-mail is configured and could be send', () => {

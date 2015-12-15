@@ -23,6 +23,7 @@ describe('Subscriber has invalid email (Rules)', () => {
 	it('When Organizer check if Subscriber fit rules', function (done) {
 		let that = this
 		that.rl.validate(function(err, results) {
+			expect(err).toBe(['E-mail inválido encontrado: inválidoemail/.com'].join('\n'))
 			expect(that.rl.valid).toBe(false)
 			done(err, results)
 		})

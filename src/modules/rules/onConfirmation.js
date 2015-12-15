@@ -27,16 +27,20 @@ class Confirmation extends Rules {
 	 * @param {Function} done2 - callback
 	 */
 	sendConfirmationMessage (row, done) {
-		let data = {
+		let that = this,
+			data = {
 			email : row['e-mail'],
 			nome : row['nomecompleto'],
 		}
-		return this.ML.send (data.email, 'Confirmação do pagamento da inscrição',
-`Olá ${data.nome},
+		this.ML.send (data.email, 'Confirmação do pagamento da inscrição',
+		`Olá ${data.nome},
 
-O pagamento da sua inscrição como participante foi confirmado.
+		O pagamento da sua inscrição como participante foi confirmado.
 
-Obrigado!`, done)
+		Obrigado!`, function(err, results) {
+			that.valid = true
+			done(err, 'Confirmação de: ' + data.email)
+		})
 	}
 
 	/**
@@ -45,12 +49,8 @@ Obrigado!`, done)
 	 * @param {Function} done2 - callback
 	 */
 	markSubscriberMakePayment (row, done) {
-		let that = this
 		row.status = 'Confirmado'
-		return row.save(function (err, results) {
-			that.valid = true
-			done(err, results)
-		})
+		row.save(done)
 	}
 }
 

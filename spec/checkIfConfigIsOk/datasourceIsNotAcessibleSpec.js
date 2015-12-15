@@ -20,7 +20,7 @@ describe('Datasource is not acessible', () => {
 		expect(process.env['GOOGLE_CREDS']).toBeDefined()
 	})
 	it('When Developer try to check if configs are ok', () => {})
-	it('Then output a message with information required', function () {
+	it('Then output a message with information required', function (done) {
 		this.chk.isValid(function (err, results) {
 			expect(err).toEqual('As configurações fornecidas para fonte de dados não são válidosError: HTTP error 400: Bad Request "A planilha deste URL não foi encontrada. Verifique se você tem o URL correto e se o proprietário da planilha não a excluiu."');
 			done()

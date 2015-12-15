@@ -22,22 +22,21 @@ class Process {
 	}
 
 	check (done) {
-		let that = this
-		this.CK.isValid(function(err, results) {
-			that.CK = results
-			done(err, results)
-		})
+		this.CK.isValid(done)
 	}
 
 	run (callback = (err, results) => {}) {
 		let that = this
 		async.waterfall([
 			function (done) { that.readDatasource(done) },
-			function (sheet_content, done) { that.parseRules(sheet_content, done) }
+			function (sheet_content, done) {
+				let r = that.getRule()
+				that.parseRule(r, sheet_content, done)
+			}
 		], function (err, results) {
 			if (!err) {
-				callback(null, ['-> Processamento finalizado com sucesso.'].join('\n'))
 				that.finished = true
+				callback(null, ['-> Processamento finalizado com sucesso.'].join('\n'))
 			} else {
 				callback(['-> ' + err].join('\n'))
 			}
@@ -48,17 +47,10 @@ class Process {
 		this.DS.readContent(done)
 	}
 
-	parseRules (sheet_content, done) {
-		let r = this.getRule()
+	parseRule (r, sheet_content, done) {
 		r.setRows(sheet_content)
 		r.setMailer(this.ML)
-		r.validate(function(err, results) {
-			if (err) {
-				done('Falha ao processar os inscritos ' + err.toString())
-			} else {
-				done(null, results)
-			}
-		})
+		r.validate(done)
 	}
 
 	setRule (rule) {

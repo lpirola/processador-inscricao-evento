@@ -23,7 +23,7 @@ describe('E-mail could not be send with SMTP server', () => {
 		expect(process.env['GOOGLE_SPREADSHEET_KEY']).toBeDefined();
 	})
 	it('When Developer try to check if configs are ok', () => {})
-	it('Then a message must be output with error details', function () {
+	it('Then a message must be output with error details', function (done) {
 		this.chk.isValid(function(err, results) {
 			expect(err).toEqual('Não foi possível enviar o email de teste.');
 			done()

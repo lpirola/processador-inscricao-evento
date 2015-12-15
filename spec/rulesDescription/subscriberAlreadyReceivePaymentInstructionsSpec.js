@@ -7,9 +7,11 @@ describe('Subscriber already receive payment instructions (Rule 1)', () => {
 	beforeAll(function() {
 		let u = new Util()
 		let m = new Mailer()
+		let r = u.validDatasource()
+		r[0]['status'] = 'Boleto Enviado'
 		m.setTransporter(u.mailerTransport())
 
-		this.rl = new onRegister(u.validDatasource())
+		this.rl = new onRegister(r)
 		this.rl.setMailer(m)
 		spyOn(this.rl, 'warningOrganizer')
 		spyOn(this.rl, 'invalidateSubscriber')

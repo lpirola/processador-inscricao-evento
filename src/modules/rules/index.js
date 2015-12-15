@@ -27,7 +27,10 @@ class Rule {
 	 */
 	filter (row) {
 		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		return !re.test(row['e-mail'].trim())
+		if (re.test(row['e-mail'].trim())) {
+			return false
+		}
+		return true
 	}
 
 	/**
@@ -38,7 +41,7 @@ class Rule {
 	 */
 	action (row, done2) {
 		let that = this;
-		return async.map(that.getActions(), function(action, done) {
+		async.eachSeries(that.getActions(), function(action, done) {
 			that[action](row, done)
 		}, done2)
 	}
@@ -51,15 +54,14 @@ class Rule {
 	validate (done2) {
 		let that = this
 		that.addActions()
-		return async.eachSeries(that.rows, function (row, done) {
+		async.eachSeries(that.rows, function (row, done) {
 			if (that.filter(row)) {
 				that.action(row, done)
 			} else {
+				that.valid = true
 				done(null, row)
 			}
-		}, function (err, results) {
-			return done2(err, results)
-		})
+		}, done2)
 	}
 
 	/**
@@ -70,7 +72,9 @@ class Rule {
 	 */
 	invalidateSubscriber (row, done) {
 		row.status = 'Inválida'
-		row.save(done)
+		row.save(function(err, results) {
+			done('E-mail inválido encontrado: ' + row['e-mail'])
+		})
 	}
 
 	/**
@@ -80,7 +84,7 @@ class Rule {
 	 * @protected
 	 */
 	warningOrganizer(row, done) {
-		return this.ML.send ('lucaspirola@gmail.com', 'email inválido encontrado na planilha', 'conteúdo da planilha', done)
+		this.ML.send ('lucaspirola@gmail.com', 'email inválido encontrado na planilha', 'conteúdo da planilha', done)
 	}
 
 	/**

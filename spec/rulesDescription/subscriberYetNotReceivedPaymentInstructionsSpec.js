@@ -1,4 +1,3 @@
-import Rules from '../../src/modules/rules'
 import Util from '../util'
 import Mailer from '../../src/modules/mailer'
 import onRegister from '../../src/modules/rules/onRegister'

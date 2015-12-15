@@ -5,8 +5,6 @@ import Util from '../util'
 
 describe('Rules has invalid options', () => {
 	beforeAll(function () {
-		spyOn(process, 'exit')
-		spyOn(process.stdout, 'write')
 		process.env['MAIL_SERVICE'] = 'Gmail';
 		process.env['MAIL_USER'] = 'teste@teste.com';
 		process.env['MAIL_PASS'] = '123';
@@ -18,26 +16,24 @@ describe('Rules has invalid options', () => {
 		this.prc = new Process()
 		this.prc.setMailer(m)
 		spyOn(this.prc, 'readDatasource').and.callThrough()
-		spyOn(this.prc, 'parseRules').and.callThrough()
+		spyOn(this.prc, 'parseRule').and.callThrough()
 	})
 	it('Given E-mail and Datasource is configured and valid', function (done) {
 		let that = this
 		this.prc.check(function (err, results) {
-			that.prc = results
-			expect(results.validate).toBe(true)
-			expect(process.stdout.write.calls.argsFor(0)[0])
+			expect(results)
 				.toEqual(['-> Checagem de conexão com a planilha ok.', '-> Checagem de envio de e-mail ok.'].join('\n'))
-			done(err, results)
+			done()
 		})
 	})
 	it('And Rules has invalid options', function () {
-		this.prc.setRule(new onRegister([]))
+		//this.prc.setRule(new onRegister([]))
 	})
 	it('When Developer try to process all subscriptions', function (done) {
 		let that = this
 		that.prc.run(function (err, results) {
 			expect(that.prc.readDatasource).toHaveBeenCalled()
-			expect(that.prc.parseRules).toHaveBeenCalled()
+			expect(that.prc.parseRule).toHaveBeenCalled()
 			expect(that.prc.finished).toBe(false)
 			done(err, results)
 		})
@@ -45,9 +41,8 @@ describe('Rules has invalid options', () => {
 	it('Then Process should output a message with details of pattern error', function(done) {
 		let that = this
 		that.prc.run(function (err, results) {
-			expect(that.prc.finished).toBe(false)
-			expect(process.stdout.write.calls.argsFor(3)[0])
-				.toEqual(['-> Falha ao validar email dos inscritos'].join('\n'))
+			expect(err)
+				.toEqual(['-> Error: E-mail inválido encontrado: lucaspirolagmail.com'].join('\n'))
 			done(err, results)
 		})
 	})
