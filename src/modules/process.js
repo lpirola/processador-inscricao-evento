@@ -36,14 +36,11 @@ class Process {
 			function (sheet_content, done) { that.parseRules(sheet_content, done) }
 		], function (err, results) {
 			if (!err) {
-				process.stdout.write(['-> Processamento finalizado com sucesso.'].join('\n'))
-				process.exit(1)
+				callback(null, ['-> Processamento finalizado com sucesso.'].join('\n'))
 				that.finished = true
 			} else {
-				process.stdout.write(['-> ' + err].join('\n'))
-				process.exit(1)
+				callback(['-> ' + err].join('\n'))
 			}
-			callback(err, results)
 		})
 	}
 

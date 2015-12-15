@@ -2,21 +2,17 @@ import Check from '../../src/modules/check'
 import Util from '../util'
 
 describe('E-mail could not be send with SMTP server', () => {
-	beforeAll((done) => {
-		spyOn(process, 'exit')
-		spyOn(process.stdout, 'write')
-
+	beforeAll(function () {
 		process.env['MAIL_SERVICE'] = 'Gmail';
 		process.env['MAIL_USER'] = 'teste@teste.com';
 		process.env['MAIL_PASS'] = '123';
 		process.env['GOOGLE_SPREADSHEET_KEY'] = '1gKGxto-RDqS5k2F3TbLXnOoj6IB6RFp18K_MUzBP_Hw'
 
-		let chk = new Check()
+		this.chk = new Check()
 		let u = new Util()
-		chk.ML.setTransporter(u.mailerTransport({
+		this.chk.ML.setTransporter(u.mailerTransport({
 			error: new Error('Invalid recipient')
 		}))
-		chk.isValid(done)
 	})
 	it('Given SMTP server details is filled', () => {
 		expect(process.env['MAIL_SERVICE']).toBeDefined()
@@ -27,13 +23,12 @@ describe('E-mail could not be send with SMTP server', () => {
 		expect(process.env['GOOGLE_SPREADSHEET_KEY']).toBeDefined();
 	})
 	it('When Developer try to check if configs are ok', () => {})
-	it('Then a message must be output with error details', () => {
-		expect(process.stdout.write.calls.argsFor(0))
-			.toEqual(['Não foi possível enviar o email de teste.']);
+	it('Then a message must be output with error details', function () {
+		this.chk.isValid(function(err, results) {
+			expect(err).toEqual('Não foi possível enviar o email de teste.');
+			done()
+		})
 	});
-	it('And process must stop', () => {
-		expect(process.exit.calls.count()).toBe(1);
-	})
 	afterAll(() => {
 		delete process.env['MAIL_SERVICE']
 		delete process.env['MAIL_USER']

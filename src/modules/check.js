@@ -17,11 +17,9 @@ class Check {
 		let that = this
 
 		if (!this.DS.isConfigEmpty()) {
-			process.stdout.write('As configurações da fonte de dados não foram informados')
-			process.exit(1)
+			callback('As configurações da fonte de dados não foram informados')
 		} else if (!this.ML.isConfigEmpty()) {
-			process.stdout.write('As configurações do envio do email não foram informados')
-			process.exit(1)
+			callback('As configurações do envio do email não foram informados')
 		} else {
 			// valida datasource
 			async.series([
@@ -31,25 +29,15 @@ class Check {
 			], function (err, results) {
 				if (!err) {
 					that.validate = true
-					process.stdout.write([
+					callback(null, [
 						'-> Checagem de conexão com a planilha ok.',
 						'-> Checagem de envio de e-mail ok.'
 					].join('\n'))
-					process.exit(1)
-					callback(null, that)
 				} else {
-					that.handleErrors(err, results, callback)
+					callback(err.toString())
 				}
 			})
 		}
-	}
-
-	handleErrors (err, results, callback) {
-		if (err) {
-			process.stdout.write(err.toString())
-			process.exit(1)
-		}
-		callback(null, results)
 	}
 }
 
