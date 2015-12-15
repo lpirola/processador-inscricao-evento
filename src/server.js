@@ -9,23 +9,22 @@ debug('web:server')
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000')
+let port = normalizePort(process.env.PORT || '3000')
 app.set('port', port)
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app)
+let server = http.createServer(app)
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-models.sequelize.sync().then(function () {
-	server.listen(port)
-	server.on('error', onError)
-	server.on('listening', onListening)
-})
+models.sequelize.sync()
+server.listen(port)
+server.on('error', onError)
+server.on('listening', onListening)
 /**
  * Normalize a port into a number, string, or false.
  */

@@ -1,7 +1,3 @@
-/**
- * Module dependencies.
- */
-
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -40,11 +36,10 @@ var server = _http2['default'].createServer(_app2['default']);
 /**
  * Listen on provided port, on all network interfaces.
  */
-_models2['default'].sequelize.sync().then(function () {
-	server.listen(port);
-	server.on('error', onError);
-	server.on('listening', onListening);
-});
+_models2['default'].sequelize.sync();
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 /**
  * Normalize a port into a number, string, or false.
  */

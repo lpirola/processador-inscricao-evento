@@ -18,7 +18,7 @@ queue.init();
 let app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -28,8 +28,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(stylus.middleware({
-	src: __dirname + '/stylus',
-	dest: __dirname + '/public',
+	src: __dirname + '/../stylus',
+	dest: __dirname + '/../public',
 	compile: function (str, path) {
 		return stylus(str)
 		.set('filename', path)
@@ -38,8 +38,8 @@ app.use(stylus.middleware({
 		.import('jeet');
 	}
 }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.get('/main.js', browserify(__dirname + '/client/index.js'));
+app.use(express.static(path.join(__dirname, '/../public')));
+app.get('/main.js', browserify(__dirname + '/../client/index.js'));
 
 app.use('/fila', kue.app);
 app.use('/', routes);

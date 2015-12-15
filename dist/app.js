@@ -63,7 +63,7 @@ _modulesQueue2['default'].init();
 var app = (0, _express2['default'])();
 
 // view engine setup
-app.set('views', _path2['default'].join(__dirname, 'views'));
+app.set('views', _path2['default'].join(__dirname, '../views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -73,14 +73,14 @@ app.use(_bodyParser2['default'].json());
 app.use(_bodyParser2['default'].urlencoded({ extended: false }));
 app.use((0, _cookieParser2['default'])());
 app.use(_stylus2['default'].middleware({
-	src: __dirname + '/stylus',
-	dest: __dirname + '/public',
+	src: __dirname + '/../stylus',
+	dest: __dirname + '/../public',
 	compile: function compile(str, path) {
 		return (0, _stylus2['default'])(str).set('filename', path).set('compress', true).use((0, _jeet2['default'])())['import']('jeet');
 	}
 }));
-app.use(_express2['default']['static'](_path2['default'].join(__dirname, 'public')));
-app.get('/main.js', (0, _browserifyMiddleware2['default'])(__dirname + '/client/index.js'));
+app.use(_express2['default']['static'](_path2['default'].join(__dirname, '/../public')));
+app.get('/main.js', (0, _browserifyMiddleware2['default'])(__dirname + '/../client/index.js'));
 
 app.use('/fila', _kue2['default'].app);
 app.use('/', _routesIndex2['default']);
