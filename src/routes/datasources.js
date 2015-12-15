@@ -1,13 +1,14 @@
-var models = require('../models');
-var express = require('express');
-var router = express.Router();
+import models  from '../models'
+import express from 'express'
+
+let router = express.Router()
 
 router.get('/', function(req, res) {
 	models.Datasource.findAll({})
 	.then(function(ds) {
 		res.json(ds)
-	});
-});
+	})
+})
 
 router.post('/', function(req, res) {
 	models.Datasource.create({
@@ -15,9 +16,9 @@ router.post('/', function(req, res) {
 		key: req.body.key,
 		interval_update: req.body.interval_update*60000
 	}).then(function(err, result) {
-		res.json(result);
-	});
-});
+		res.json(result)
+	})
+})
 
 router.put('/', function(req, res) {
 	models.Datasources.upsert({
@@ -25,9 +26,9 @@ router.put('/', function(req, res) {
 		key: req.body.key,
 		interval_update: req.body.interval_update*60000
 	}).then(function(err, result) {
-		res.json(result);
-	});
-});
+		res.json(result)
+	})
+})
 
 router.delete('/:ds_id', function(req, res) {
 	models.Datasource.destroy({
@@ -35,8 +36,8 @@ router.delete('/:ds_id', function(req, res) {
 			id: req.params.ds_id
 		}
 	}).then(function() {
-		res.redirect('/');
-	});
-});
+		res.redirect('/')
+	})
+})
 
-module.exports = router;
+export default router

@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = function(sequelize, DataTypes) {
   var Datasource = sequelize.define("Datasource", {
     name: DataTypes.STRING,

@@ -5,7 +5,7 @@
   "main": "bin/www",
   "scripts": {
 	"postinstall": "./node_modules/.bin/babel src -d dist",
-    "start": "./node_modules/.bin/babel-node ./bin/www",
+    "start": "./node_modules/.bin/babel-node ./src/server.js",
     "test": "./node_modules/.bin/jasmine",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },

@@ -1,21 +1,21 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var browserify = require('browserify-middleware');
-var stylus = require('stylus');
-var jeet = require('jeet');
-var kue = require('kue');
-var Queue = require('./modules/queue');
-var routes = require('./routes/index');
-var datasources = require('./routes/datasources');
+import express      from 'express'
+import path         from 'path'
+import favicon      from 'serve-favicon'
+import logger       from 'morgan'
+import cookieParser from 'cookie-parser'
+import bodyParser   from 'body-parser'
+import browserify   from 'browserify-middleware'
+import stylus       from 'stylus'
+import jeet         from 'jeet'
+import kue          from 'kue'
 
+import queue       from './modules/queue'
+import routes      from './routes/index'
+import datasources from './routes/datasources'
 
-Queue.init();
+queue.init();
 
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -62,8 +62,8 @@ if (app.get('env') === 'development') {
 		res.render('error', {
 			message: err.message,
 			error: err
-		});
-	});
+		})
+	})
 }
 
 // production error handler
@@ -73,8 +73,8 @@ app.use(function(err, req, res, next) {
 	res.render('error', {
 		message: err.message,
 		error: {}
-	});
-});
+	})
+})
 
 
-module.exports = app;
+export default app

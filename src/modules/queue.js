@@ -6,9 +6,8 @@ import kue from 'kue'
 import models from '../models'
 
 let redis_url = process.env['REDIS_URL'] || 'redis://127.0.0.1:6379'
-var queue = kue.createQueue({ redis: redis_url })
-
-var jobs = {
+let queue = kue.createQueue({ redis: redis_url })
+let jobs = {
 	createRegister : function(ds) {
 		let j = queue.create('register', {
 			id: ds.id,
@@ -63,11 +62,6 @@ var jobs = {
 		queue.process('register', jobs.processRegister)
 		queue.process('confirm', jobs.processConfirm)
 	}
-
-	// check () {
-	// 	let chk = new Check()
-	// 	chk.isValid()
-	// }
 }
 
 export default jobs
