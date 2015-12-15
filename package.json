@@ -1,54 +1,58 @@
 {
-  "name": "processador-inscricao-evento",
-  "version": "0.0.2",
-  "description": "Processador de inscrições em eventos que utiliza uma planilha no Google Drive para controlar o envio de e-mail para pagamento e para confirmação da inscrição",
-  "main": "bin/www",
-  "scripts": {
-	"postinstall": "./node_modules/.bin/babel src -d dist",
-    "start": "./node_modules/.bin/babel-node ./src/server.js",
-    "test": "./node_modules/.bin/jasmine",
-    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lpirola/processador-inscricao-evento.git"
-  },
-  "keywords": [
-    "queue",
-    "web",
-    "bdd"
-  ],
-  "author": "Lucas Pirola <lucaspirola@gmail.com>",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/lpirola/processador-inscricao-evento/issues"
-  },
-  "homepage": "https://github.com/lpirola/processador-inscricao-evento#readme",
-  "dependencies": {
-    "async": "^1.5.0",
-    "body-parser": "~1.13.2",
-    "browserify-middleware": "^7.0.0",
-    "commander": "^2.9.0",
-    "cookie-parser": "~1.3.5",
-    "debug": "~2.2.0",
-    "express": "~4.13.1",
-    "google-spreadsheet": "^1.0.1",
-    "jade": "~1.11.0",
-    "jeet": "^6.1.2",
-    "kue": "^0.10.4",
-    "mithril": "^0.2.0",
-    "morgan": "~1.6.1",
-    "mysql": "^2.9.0",
-    "nodemailer": "^1.10.0",
-    "sequelize": "^3.14.2",
-    "serve-favicon": "~2.3.0",
-    "stylus": "0.42.3",
-    "babel-cli": "^6.2.1"
-  },
-  "devDependencies": {
-    "istanbul": "^0.4.1",
-    "jasmine-es6": "0.0.18",
-    "minami": "^1.1.1",
-    "nodemailer-stub-transport": "^1.0.0"
-  }
+	"name": "processador-inscricao-evento",
+	"version": "0.0.2",
+	"description": "Processador de inscrições em eventos que utiliza uma planilha no Google Drive para controlar o envio de e-mail para pagamento e para confirmação da inscrição",
+	"main": "bin/www",
+	"scripts": {
+		"postinstall": "./node_modules/.bin/babel src -d dist",
+		"start": "./node_modules/.bin/babel-node ./src/server.js",
+		"test": "./node_modules/.bin/jasmine",
+		"generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/lpirola/processador-inscricao-evento.git"
+	},
+	"keywords": [
+		"queue",
+		"web",
+		"bdd"
+	],
+	"author": "Lucas Pirola <lucaspirola@gmail.com>",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/lpirola/processador-inscricao-evento/issues"
+	},
+	"homepage": "https://github.com/lpirola/processador-inscricao-evento#readme",
+	"dependencies": {
+		"async": "^1.5.0",
+		"body-parser": "~1.13.2",
+		"browserify-middleware": "^7.0.0",
+		"commander": "^2.9.0",
+		"cookie-parser": "~1.3.5",
+		"debug": "~2.2.0",
+		"express": "~4.13.1",
+		"google-spreadsheet": "^1.0.1",
+		"jade": "~1.11.0",
+		"jeet": "^6.1.2",
+		"kue": "^0.10.4",
+		"mithril": "^0.2.0",
+		"morgan": "~1.6.1",
+		"mysql": "^2.9.0",
+		"nodemailer": "^1.10.0",
+		"sequelize": "^3.14.2",
+		"serve-favicon": "~2.3.0",
+		"stylus": "0.42.3",
+		"babel-cli": "^6.2.1"
+	},
+	"devDependencies": {
+		"istanbul": "^0.4.1",
+		"jasmine-es6": "0.0.18",
+		"minami": "^1.1.1",
+		"nodemailer-stub-transport": "^1.0.0"
+	},
+	"engines" : {
+		"node" : "v0.12.7",
+		"npm" : "2.11.3"
+	}
 }
