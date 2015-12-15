@@ -1,4 +1,4 @@
-import Check from '../../src/check'
+import Check from '../../src/modules/check'
 
 describe('Datasource config is empty', () => {
 	beforeAll(() => {

@@ -1,7 +1,7 @@
-import Rules from '../../src/rules'
+import Rules from '../../src/modules/rules'
 import Util from '../util'
-import Mailer from '../../src/mailer'
-import onRegister from '../../src/rules/onRegister'
+import Mailer from '../../src/modules/mailer'
+import onRegister from '../../src/modules/rules/onRegister'
 
 describe('Subscriber already receive payment instructions (Rule 1)', () => {
 	beforeAll(function() {

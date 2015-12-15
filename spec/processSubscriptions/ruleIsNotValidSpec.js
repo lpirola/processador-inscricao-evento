@@ -1,6 +1,6 @@
-import onRegister from '../../src/rules/onRegister'
-import Process from '../../src/process'
-import Mailer from '../../src/mailer'
+import onRegister from '../../src/modules/rules/onRegister'
+import Process from '../../src/modules/process'
+import Mailer from '../../src/modules/mailer'
 import Util from '../util'
 
 describe('Rules has invalid options', () => {

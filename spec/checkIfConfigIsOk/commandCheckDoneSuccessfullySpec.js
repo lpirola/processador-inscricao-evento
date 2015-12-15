@@ -1,4 +1,4 @@
-import Check from '../../src/check'
+import Check from '../../src/modules/check'
 import Util from '../util'
 
 var chk

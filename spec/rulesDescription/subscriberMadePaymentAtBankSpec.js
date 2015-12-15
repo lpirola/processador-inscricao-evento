@@ -1,4 +1,4 @@
-import Rules from '../../src/rules'
+import Rules from '../../src/modules/rules'
 import Util from '../util'
 
 describe('Subscriber made payment at bank (Rule 2)', () => {

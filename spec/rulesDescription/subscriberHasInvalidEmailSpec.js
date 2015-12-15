@@ -1,6 +1,6 @@
-import Rules from '../../src/rules'
+import Rules from '../../src/modules/rules'
 import Util from '../util'
-import Mailer from '../../src/mailer'
+import Mailer from '../../src/modules/mailer'
 
 describe('Subscriber has invalid email (Rules)', () => {
 	beforeAll(function() {

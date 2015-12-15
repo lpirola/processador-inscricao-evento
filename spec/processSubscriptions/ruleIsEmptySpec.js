@@ -1,4 +1,4 @@
-import Process from '../../src/process'
+import Process from '../../src/modules/process'
 
 var prc;
 describe('Rules is empty', () => {

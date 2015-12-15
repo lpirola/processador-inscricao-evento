@@ -1,4 +1,4 @@
-import Check from '../../src/check'
+import Check from '../../src/modules/check'
 describe('SMTP server is not configured', () => {
 	beforeAll(() => {
 		spyOn(process, 'exit')
