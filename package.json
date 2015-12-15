@@ -4,7 +4,7 @@
   "description": "Processador de inscrições em eventos que utiliza uma planilha no Google Drive para controlar o envio de e-mail para pagamento e para confirmação da inscrição",
   "main": "bin/www",
   "scripts": {
-	"build": "./node_modules/.bin/babel src -d dist",
+	"postinstall": "./node_modules/.bin/babel src -d dist",
     "start": "./node_modules/.bin/babel-node ./bin/www",
     "test": "./node_modules/.bin/jasmine",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
