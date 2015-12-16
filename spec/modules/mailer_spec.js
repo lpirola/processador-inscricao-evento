@@ -1,5 +1,5 @@
 import Check from '../../src/modules/check'
-import Util from '../util'
+import Util from '../support/util'
 
 describe('E-mail could not be send with SMTP server', () => {
 	beforeAll(function () {

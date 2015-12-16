@@ -2,9 +2,10 @@
   "name": "processador-inscricao-evento",
   "version": "0.0.2",
   "description": "Processador de inscrições em eventos que utiliza uma planilha no Google Drive para controlar o envio de e-mail para pagamento e para confirmação da inscrição",
-  "main": "bin/www",
+  "main": "src/server.js",
   "scripts": {
     "start": "./node_modules/.bin/babel-node ./src/server.js",
+	"postinstall": "./node_modules/.bin/babel ./src/ -d ./dist/",
     "test": "./node_modules/.bin/jasmine",
     "generate-docs": "./node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },

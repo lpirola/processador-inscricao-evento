@@ -1,6 +1,6 @@
-import Util from '../util'
-import Mailer from '../../src/modules/mailer'
-import onRegister from '../../src/modules/rules/onRegister'
+import Util from '../../support/util'
+import Mailer from '../../../src/modules/mailer'
+import onRegister from '../../../src/modules/rules/onRegister'
 
 describe('Subscriber yet not received payment instructions (Rule 1)', () => {
 	beforeAll(function() {

@@ -1,7 +1,7 @@
 import onRegister from '../../src/modules/rules/onRegister'
 import Process from '../../src/modules/process'
 import Mailer from '../../src/modules/mailer'
-import Util from '../util'
+import Util from '../support/util'
 
 describe('Rules has invalid options', () => {
 	beforeAll(function () {
@@ -42,8 +42,9 @@ describe('Rules has invalid options', () => {
 		let that = this
 		that.prc.run(function (err, results) {
 			expect(err)
-				.toEqual(['-> Error: E-mail inválido encontrado: lucaspirolagmail.com'].join('\n'))
+				.toEqual(['-> E-mail inválido encontrado: lucaspirolagmail.com'].join('\n'))
 			done(err, results)
 		})
 	})
 })
+
