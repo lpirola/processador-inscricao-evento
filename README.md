@@ -1,7 +1,9 @@
 [![Stories in Ready](https://badge.waffle.io/lpirola/processador-inscricao-evento.png?label=ready&title=Ready)](https://waffle.io/lpirola/processador-inscricao-evento)
 [![Documentation](https://doc.esdoc.org/github.com/lpirola/processador-inscricao-evento/badge.svg)](https://doc.esdoc.org/github.com/lpirola/processador-inscricao-evento/)
+[![Test Coverage](https://codeclimate.com/github/lpirola/processador-inscricao-evento/badges/coverage.svg)](https://codeclimate.com/github/lpirola/processador-inscricao-evento/coverage)
 
 # Processador de inscricões em eventos
+
 É utilizado uma planilha no Google Drive para controlar o envio de e-mail com boleto para pagamento e confirmação da inscrição.
 
 ## Dependências
@@ -24,13 +26,6 @@ export MAIL_SERVICE='Gmail'
 export MAIL_USER='xxxx@gmail.com'
 export MAIL_PASS='xxxx'
 export GOOGLE_CREDS='{"type": "service_account","private_key_id": "","private_key": "","client_email": "","client_id": "","auth_uri": "","token_uri": "","auth_provider_x509_cert_url": "","client_x509_cert_url": ""}'
-```
-
-## Comandos
-
-```
-./node_modules/.bin/babel-node src check
-./node_modules/.bin/babel-node src process
 ```
 
 ## Docs
