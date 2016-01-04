@@ -48,6 +48,8 @@ Ele poderá ser feito até 15 de janeiro de 2016 em qualquer agência bancária,
 
 A confirmação da inscrição será enviada assim que recebermos do banco responsável a confirmação de pagamento (o que pode demorar até 5 dias úteis a partir da data de pagamento).
 
+Não esqueça de apresentar o comprovante de pagamento do boleto bancário no credenciamento.
+
 Obrigado!`, function (err, results) {
 				that.valid = true
 				done(err, 'Registro de: ' + data.email)

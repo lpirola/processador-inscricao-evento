@@ -73,7 +73,6 @@ var JobList = {
 					m('th', '')
 				])),
 				args.jobs().map(function(j) {
-					console.log(j)
 					return m("tr", [
 						m("td", j.id),
 						m("td", j.state),
