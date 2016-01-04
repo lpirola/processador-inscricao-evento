@@ -21,7 +21,9 @@ class Register extends Rules{
 	 */
 	filter (row) {
 		// pegadinha com "!" por causa da validação por e-mail
-		return (!super.filter(row)) && (row['status'] === '')
+		return (!super.filter(row))
+				&& (row['status'] === '')
+				&& (row['pagamentodataxadeinscriçãor2000'] === 'Boleto Eletrônico - clique aqui')
 	}
 
 	/**
