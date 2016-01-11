@@ -23,7 +23,7 @@ class Register extends Rules{
 		// pegadinha com "!" por causa da validação por e-mail
 		return (!super.filter(row))
 				&& (row['status'] === '')
-				&& (row['pagamentodataxadeinscriçãor2000'] === 'Boleto Eletrônico - clique aqui')
+				  && (row['pagamentodataxadeinscriçãor2000'] === 'Boleto Eletrônico - receber por email, a partir do dia 30/11  e enviar o comprovante de pagamento para espaco.fsm.poa@gmail.com; ou apresentar o comprovante de pagamento no credenciamento.')
 	}
 
 	/**

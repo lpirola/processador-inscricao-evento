@@ -18,7 +18,7 @@ class Confirmation extends Rules {
 	 */
 	filter (row) {
 		// pegadinha com "!" por causa da validação por e-mail
-		return (!super.filter(row)) && (row['status'] === 'Boleto Pago')
+		return (!super.filter(row)) && (row['status'] === 'ok')
 	}
 
 	/**
